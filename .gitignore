@@ -1,0 +1,14 @@
+# Crystal dependencies and build outputs
+/.shards/
+/lib/
+/bin/
+/docs/
+
+# Example outputs
+/examples/out/
+
+# Editor / language tooling
+/examples/__pycache__/
+*.pyc
+/.ruby-lsp/
+.codex

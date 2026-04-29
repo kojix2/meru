@@ -1,0 +1,10 @@
+version: 2.0
+shards:
+  fastx:
+    git: https://github.com/bio-cr/fastx.cr.git
+    version: 0.0.4
+
+  unicode_plot:
+    git: https://github.com/kojix2/unicode_plot.cr.git
+    version: 0.1.0+git.commit.dfb29f08480c2cb34e3d6065a504dfc6f1d2e180
+

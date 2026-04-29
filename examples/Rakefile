@@ -1,0 +1,67 @@
+# frozen_string_literal: true
+
+require "fileutils"
+require "rake"
+require_relative "tanuki_support"
+
+EXAMPLES_DIR = TanukiSupport.examples_dir
+REPO_ROOT = TanukiSupport.repo_root
+OUTDIR = File.expand_path(ENV.fetch("OUTDIR", File.join(EXAMPLES_DIR, "out", "tanuki")))
+MERU = File.expand_path(ENV.fetch("MERU", File.join(REPO_ROOT, "bin", "meru")))
+K = ENV.fetch("K", "21")
+READS_PER_COPY = ENV.fetch("READS_PER_COPY", TanukiSupport::DEFAULT_READS_PER_COPY.to_s)
+READ_LENGTH = ENV.fetch("READ_LENGTH", TanukiSupport::DEFAULT_READ_LENGTH.to_s)
+SEED = ENV.fetch("SEED", TanukiSupport::DEFAULT_SEED.to_s)
+
+def ruby_script(name, *args)
+  sh "ruby", TanukiSupport.script_path(name), *args
+end
+
+desc "Show available example tasks"
+task :help do
+  puts "Example tasks:"
+  puts "  rake tanuki           Run the full tanuki workflow"
+  puts "  rake genomes          Generate tanuki genomes"
+  puts "  rake clean            Remove examples/out/tanuki"
+  puts
+  puts "Variables:"
+  puts "  MERU=../bin/meru      Path to meru executable"
+  puts "  OUTDIR=out/tanuki     Output directory"
+  puts "  SEED=20260429         Base seed"
+  puts "  K=21                  k-mer size"
+  puts "  READS_PER_COPY=#{TanukiSupport::DEFAULT_READS_PER_COPY}    Reads per haploid copy"
+  puts "  READ_LENGTH=90        Read length"
+  puts
+  puts "Examples:"
+  puts "  cd examples && rake tanuki"
+  puts "  cd examples && rake tanuki MERU=../bin/meru SEED=42"
+end
+
+task default: :help
+
+desc "Generate tanuki genomes only"
+task :genomes do
+  ruby_script(
+    "generate_tanuki_genomes.rb",
+    "--outdir", File.join(OUTDIR, "genomes"),
+    "--seed", SEED
+  )
+end
+
+desc "Run the full tanuki workflow"
+task :tanuki do
+  ruby_script(
+    "run_tanuki_workflow.rb",
+    "--outdir", OUTDIR,
+    "--meru", MERU,
+    "--k", K,
+    "--reads-per-copy", READS_PER_COPY,
+    "--read-length", READ_LENGTH,
+    "--seed", SEED
+  )
+end
+
+desc "Remove generated tanuki example output"
+task :clean do
+  rm_rf(OUTDIR)
+end
