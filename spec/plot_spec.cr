@@ -73,11 +73,13 @@ describe Meru::Plot do
     Meru::Plot.smudge(smudges, 100, true, io, 30, 10)
 
     lines = io.to_s.lines
-    top_idx = lines.index { |line| line.matches?(/^\s*100 │/) }
-    bottom_idx = lines.index { |line| line.matches?(/^\s*0 │/) }
+    top_idx = lines.index(&.matches?(/^\s*100 │/))
+    bottom_idx = lines.index(&.matches?(/^\s*0 │/))
 
-    top_idx.should_not be_nil
-    bottom_idx.should_not be_nil
-    top_idx.not_nil!.should be < bottom_idx.not_nil!
+    if top_idx && bottom_idx
+      top_idx.should be < bottom_idx
+    else
+      fail "expected both top and bottom y-axis labels to be present"
+    end
   end
 end
