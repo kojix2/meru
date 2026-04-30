@@ -13,6 +13,7 @@ module Meru
 
         opts.separator("")
         opts.separator("Basic options:")
+
         opts.on("-k", "--kmer INT", "k-mer length (default: 21, max: 32)") do |v|
           config.k = v.to_i
         end
@@ -27,6 +28,7 @@ module Meru
 
         opts.separator("")
         opts.separator("Analysis:")
+
         opts.on("--min-depth INT", "minimum k-mer depth to include (default: 1)") do |v|
           config.min_depth = v.to_i
         end
@@ -41,6 +43,7 @@ module Meru
 
         opts.separator("")
         opts.separator("Plot:")
+
         opts.on("--no-plot", "do not print terminal plots") do
           config.plot = false
         end
@@ -59,6 +62,7 @@ module Meru
 
         opts.separator("")
         opts.separator("Advanced:")
+
         opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: 2)") do |v|
           config.pair_min_depth = v.to_i
         end
@@ -69,6 +73,7 @@ module Meru
 
         opts.separator("")
         opts.separator("Other:")
+
         opts.on("--version", "show version") do
           show_version = true
         end
