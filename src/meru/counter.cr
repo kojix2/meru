@@ -1,5 +1,6 @@
 module Meru
   alias KmerCounts = Hash(UInt64, UInt32)
+  alias WorkerResult = Counter | Exception
 
   class Counter
     getter k : Int32
@@ -61,17 +62,21 @@ module Meru
       return count_files(paths, k) if threads <= 1
 
       jobs = Channel(Array(String)?).new(threads)
-      results = Channel(Counter).new(threads)
+      results = Channel(WorkerResult).new(threads)
 
       threads.times do
         spawn do
-          local = Counter.new(k)
-          loop do
-            chunk = jobs.receive
-            break if chunk.nil?
-            chunk.each { |seq| local.add_sequence(seq) }
+          begin
+            local = Counter.new(k)
+            loop do
+              chunk = jobs.receive
+              break if chunk.nil?
+              chunk.each { |seq| local.add_sequence(seq) }
+            end
+            results.send(local)
+          rescue ex
+            results.send(ex)
           end
-          results.send(local)
         end
       end
 
@@ -91,7 +96,13 @@ module Meru
 
       merged = Counter.new(k)
       threads.times do
-        merged.merge!(results.receive)
+        result = results.receive
+        case result
+        when Counter
+          merged.merge!(result)
+        when Exception
+          raise result
+        end
       end
       merged
     end

@@ -18,4 +18,10 @@ describe Meru::Counter do
     counter.valid_kmers.should eq 6_u64
     counter.counts.empty?.should be_false
   end
+
+  it "raises worker exceptions instead of waiting forever in parallel counting" do
+    expect_raises(ArgumentError, "k must be between 1 and 32") do
+      Meru::Counter.count_files_parallel([] of String, 0, 2)
+    end
+  end
 end
