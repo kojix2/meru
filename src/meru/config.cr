@@ -13,6 +13,7 @@ module Meru
     property pair_min_depth : Int32?
     property pair_max_depth : Int32?
     property? log_scale : Bool
+    property? linear_smudge : Bool
     property plot_width : Int32
     property plot_height : Int32
 
@@ -28,6 +29,7 @@ module Meru
       @pair_min_depth : Int32? = nil,
       @pair_max_depth : Int32? = nil,
       @log_scale : Bool = false,
+      @linear_smudge : Bool = false,
       @plot_width : Int32 = 80,
       @plot_height : Int32 = 20,
     )

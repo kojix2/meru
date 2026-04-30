@@ -35,13 +35,27 @@ describe Meru::Plot do
     smudges = Meru::SmudgeTable.new(bins)
     io = IO::Memory.new
 
-    Meru::Plot.smudge(smudges, nil, io, 40, 12)
+    Meru::Plot.smudge(smudges, nil, true, io, 40, 12)
 
     output = io.to_s
     output.should contain("Smudgeplot")
     output.should contain("minor ratio")
     output.should contain("total coverage")
+    output.should contain("log10(pair count + 1)")
     output.should contain("AAAB")
+  end
+
+  it "renders smudge with linear pair-count labeling when requested" do
+    bins = Hash(Meru::SmudgeKey, UInt64).new(0_u64)
+    bins[{13_u32, 26_u64}] = 20_u64
+    smudges = Meru::SmudgeTable.new(bins)
+    io = IO::Memory.new
+
+    Meru::Plot.smudge(smudges, nil, false, io, 40, 12)
+
+    output = io.to_s
+    output.should contain("pair count")
+    output.should_not contain("log10(pair count + 1)")
   end
 
   it "doubles max depth for smudge total coverage display" do
@@ -56,7 +70,7 @@ describe Meru::Plot do
     smudges = Meru::SmudgeTable.new(bins)
     io = IO::Memory.new
 
-    Meru::Plot.smudge(smudges, 100, io, 30, 10)
+    Meru::Plot.smudge(smudges, 100, true, io, 30, 10)
 
     lines = io.to_s.lines
     top_idx = lines.index { |line| line.matches?(/^\s*100 │/) }

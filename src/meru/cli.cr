@@ -48,8 +48,12 @@ module Meru
           config.plot = false
         end
 
-        opts.on("--log", "use log-scaled plots") do
+        opts.on("--log", "use log10(count + 1) for the k-mer histogram") do
           config.log_scale = true
+        end
+
+        opts.on("--linear-smudge", "use linear pair counts for the smudgeplot") do
+          config.linear_smudge = true
         end
 
         opts.on("--plot-width INT", "plot width (default: 80)") do |v|
@@ -151,6 +155,7 @@ module Meru
             Plot.smudge(
               smudges_local,
               Plot.smudge_display_max_total_cov(config.max_depth),
+              !config.linear_smudge?,
               STDOUT,
               config.plot_width,
               config.plot_height
