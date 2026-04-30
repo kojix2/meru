@@ -2,6 +2,9 @@ module Meru
   alias KmerCounts = Hash(UInt64, UInt32)
   alias WorkerResult = Counter | Exception
 
+  class CountCapacityError < Exception
+  end
+
   class Counter
     getter k : Int32
     getter counts : KmerCounts
@@ -25,20 +28,28 @@ module Meru
     def add_sequence_bytes(bytes : Bytes)
       @total_bases += bytes.size.to_u64
 
-      Kmer.each_canonical_bytes(bytes, @k) do |kmer|
-        current = @counts[kmer]
-        @counts[kmer] = current == UInt32::MAX ? UInt32::MAX : current + 1_u32
-        @valid_kmers += 1
+      begin
+        Kmer.each_canonical_bytes(bytes, @k) do |kmer|
+          current = @counts[kmer]
+          @counts[kmer] = current == UInt32::MAX ? UInt32::MAX : current + 1_u32
+          @valid_kmers += 1
+        end
+      rescue ex
+        raise_capacity_error(ex)
       end
     end
 
     def merge!(other : Counter)
       raise ArgumentError.new("cannot merge counters with different k") unless @k == other.k
 
-      other.counts.each do |kmer, count|
-        current = @counts[kmer]
-        sum = current.to_u64 + count.to_u64
-        @counts[kmer] = sum > UInt32::MAX ? UInt32::MAX : sum.to_u32
+      begin
+        other.counts.each do |kmer, count|
+          current = @counts[kmer]
+          sum = current.to_u64 + count.to_u64
+          @counts[kmer] = sum > UInt32::MAX ? UInt32::MAX : sum.to_u32
+        end
+      rescue ex
+        raise_capacity_error(ex)
       end
 
       @total_reads += other.total_reads
@@ -105,6 +116,16 @@ module Meru
         end
       end
       merged
+    end
+
+    private def raise_capacity_error(ex : Exception) : NoReturn
+      raise ex unless ex.message == "Maximum Hash size reached"
+
+      raise CountCapacityError.new(
+        "too many distinct k-mers for the current in-memory Hash table. " \
+        "This usually happens on very large reference FASTA inputs such as hg38. " \
+        "Meru currently works best on read datasets or smaller references."
+      )
     end
   end
 end
