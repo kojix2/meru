@@ -23,6 +23,12 @@ module Meru
       Unicode.smudge(smudges, max_total_cov, io, width, height)
     end
 
+    def smudge_display_max_total_cov(max_depth : Int32?) : Int32?
+      return unless value = max_depth
+      return Int32::MAX if value > Int32::MAX // 2
+      value * 2
+    end
+
     def signals(signals : Array(Signal), io : IO = STDOUT)
       Text.signals(signals, io)
     end

@@ -143,7 +143,13 @@ module Meru
         unless config.hist_only?
           puts
           if smudges_local = smudges
-            Plot.smudge(smudges_local, config.max_depth, STDOUT, config.plot_width, config.plot_height)
+            Plot.smudge(
+              smudges_local,
+              Plot.smudge_display_max_total_cov(config.max_depth),
+              STDOUT,
+              config.plot_width,
+              config.plot_height
+            )
           end
         end
       end

@@ -43,4 +43,9 @@ describe Meru::Plot do
     output.should contain("total coverage")
     output.should contain("AAAB")
   end
+
+  it "doubles max depth for smudge total coverage display" do
+    Meru::Plot.smudge_display_max_total_cov(50).should eq 100
+    Meru::Plot.smudge_display_max_total_cov(nil).should be_nil
+  end
 end

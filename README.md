@@ -32,6 +32,8 @@ Tiny example:
 bin/meru spec/fixtures/tiny.fastq -k 3 -o tiny
 ```
 
+`--max-depth` limits the k-mer coverage range used for histogram display and filtering. When a smudgeplot is shown, `meru` expands that limit to `max_depth * 2` on the y-axis because the smudgeplot uses total coverage (`depth_a + depth_b`), not single-k-mer depth.
+
 Main outputs:
 
 - `sample.kmer_hist.tsv`
