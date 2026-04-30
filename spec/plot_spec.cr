@@ -48,4 +48,22 @@ describe Meru::Plot do
     Meru::Plot.smudge_display_max_total_cov(50).should eq 100
     Meru::Plot.smudge_display_max_total_cov(nil).should be_nil
   end
+
+  it "renders higher total coverage above lower total coverage in Unicode smudge plots" do
+    bins = Hash(Meru::SmudgeKey, UInt64).new(0_u64)
+    bins[{5_u32, 10_u64}] = 1_u64
+    bins[{5_u32, 90_u64}] = 100_u64
+    smudges = Meru::SmudgeTable.new(bins)
+    io = IO::Memory.new
+
+    Meru::Plot.smudge(smudges, 100, io, 30, 10)
+
+    lines = io.to_s.lines
+    top_idx = lines.index { |line| line.matches?(/^\s*100 │/) }
+    bottom_idx = lines.index { |line| line.matches?(/^\s*0 │/) }
+
+    top_idx.should_not be_nil
+    bottom_idx.should_not be_nil
+    top_idx.not_nil!.should be < bottom_idx.not_nil!
+  end
 end
