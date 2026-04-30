@@ -71,6 +71,7 @@ install: build
 
 $(BIN): FORCE $(SRC) shard.yml shard.lock
 	@mkdir -p $(BIN_DIR)
+	rm -f $(BIN_PATH) $(BIN_PATH).dwarf
 	$(CRYSTAL_CMD)
 
 smoke: build
@@ -103,7 +104,7 @@ else
 endif
 
 clean:
-	rm -f $(BIN) $(BIN).exe
+	rm -f $(BIN) $(BIN).dwarf $(BIN).exe $(BIN).exe.dwarf
 
 print-config:
 	@printf 'CRYSTAL_CMD=%s\n' '$(CRYSTAL_CMD)'
