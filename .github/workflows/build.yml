@@ -68,23 +68,6 @@ jobs:
         shell: msys2 {0}
         run: shards install --without-development
 
-      - name: Run tests
-        if: matrix.target != 'x86_64-pc-windows-gnu'
-        run: |
-          crystal build src/meru.cr -o bin/$BIN
-          bin/$BIN --help
-          bin/$BIN spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
-          crystal spec
-
-      - name: Run tests (MinGW64)
-        if: matrix.target == 'x86_64-pc-windows-gnu'
-        shell: msys2 {0}
-        run: |
-          crystal build src/meru.cr -o bin/$BIN
-          bin/$BIN --help
-          bin/$BIN spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
-          crystal spec
-
       - name: Build on Linux
         if: matrix.target == 'x86_64-unknown-linux-musl'
         shell: bash
@@ -109,23 +92,11 @@ jobs:
         if: startsWith(matrix.target, 'x86_64-apple-darwin') || startsWith(matrix.target, 'aarch64-apple-darwin')
         shell: bash
         run: |
+          mkdir -p bin
           shards install --without-development --release
-          brew update
-          brew install libgc pcre2
-          echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-          unset PKG_CONFIG_PATH
-          echo "cleared PKG_CONFIG_PATH to avoid openSSL conflicts"
-          ln -s $(brew ls libgc | grep libgc.a) .
-          ln -s $(brew ls pcre2 | grep libpcre2-8.a) .
-          STATIC_LIBS="-L $(pwd) $(pwd)/libgc.a $(pwd)/libpcre2-8.a"
-          shards build --link-flags="$STATIC_LIBS" --release
+          shards build --release
           chmod +x bin/$BIN
           otool -L bin/$BIN
-          if otool -L bin/$BIN | grep homebrew; then
-            echo "Error: Homebrew dependencies detected!"
-            exit 1
-          fi
-          echo "Static linking successful"
           file bin/$BIN
           bin/$BIN --help
           PKG=meru-${VERSION}-${{ matrix.target }}
@@ -134,6 +105,15 @@ jobs:
           cp LICENSE $PKG/
           cp README.md $PKG/
           tar czf $PKG.tar.gz $PKG
+
+      - name: Verify and test on Unix
+        if: matrix.target == 'x86_64-unknown-linux-musl' || startsWith(matrix.target, 'x86_64-apple-darwin') || startsWith(matrix.target, 'aarch64-apple-darwin')
+        shell: bash
+        run: |
+          mkdir -p bin
+          bin/$BIN --help
+          bin/$BIN spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
+          crystal spec
 
       - name: Build on Windows (MSVC)
         if: matrix.target == 'x86_64-pc-windows-msvc'
@@ -149,6 +129,15 @@ jobs:
           Copy-Item "README.md" "$pkg/"
           Compress-Archive -Path "$pkg/*" -DestinationPath "$pkg.zip"
 
+      - name: Verify and test on Windows (MSVC)
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force bin | Out-Null
+          bin/$env:BIN.exe --help
+          bin/$env:BIN.exe spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
+          crystal spec
+
       - name: Build on Windows (MinGW64)
         if: matrix.target == 'x86_64-pc-windows-gnu'
         shell: msys2 {0}
@@ -163,6 +152,15 @@ jobs:
           cp LICENSE $PKG/
           cp README.md $PKG/
           zip -r $PKG.zip $PKG
+
+      - name: Verify and test on Windows (MinGW64)
+        if: matrix.target == 'x86_64-pc-windows-gnu'
+        shell: msys2 {0}
+        run: |
+          mkdir -p bin
+          bin/$BIN.exe --help
+          bin/$BIN.exe spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
+          crystal spec
 
       - name: Upload artifacts (non-release)
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
