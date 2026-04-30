@@ -6,7 +6,7 @@
 
 `meru` is a small Crystal CLI for exploratory k-mer profiling in the terminal.
 
-This is a simple project created with agentic AI coding. It displays Smudgeplot-like heatmaps in the terminal.
+This is a simple project created with agentic AI coding. It displays [Smudgeplot](https://github.com/KamilSJaron/smudgeplot)-like heatmaps in the terminal.
 
 ## Build
 
