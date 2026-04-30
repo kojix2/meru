@@ -72,6 +72,11 @@
       
     </li>
   
+  <li class=" " data-id="meru/Meru/CountCapacityError" data-name="meru::countcapacityerror">
+      <a href="Meru/CountCapacityError.html">CountCapacityError</a>
+      
+    </li>
+  
   <li class=" " data-id="meru/Meru/Counter" data-name="meru::counter">
       <a href="Meru/Counter.html">Counter</a>
       
@@ -234,7 +239,9 @@
 <pre><code class="language-bash">bin/meru reads.fq.gz -k 21 -o sample</code></pre>
 <p>Tiny example:</p>
 <pre><code class="language-bash">bin/meru spec/fixtures/tiny.fastq -k 3 -o tiny</code></pre>
+<p>Inputs can be FASTQ (<code>.fq</code>, <code>.fastq</code>, optionally <code>.gz</code>) or FASTA (<code>.fa</code>, <code>.fasta</code>, optionally <code>.gz</code>), detected by filename extension.</p>
 <p><code>--min-depth</code> and <code>--max-depth</code> define the histogram depth range. Pair extraction uses <code>max(2, --min-depth)</code> and <code>--max-depth</code> by default, so singleton error k-mers stay out of the smudge workflow unless you opt in explicitly. <code>--pair-min-depth</code> and <code>--pair-max-depth</code> override only the pair-extraction range. When a smudgeplot is shown, <code>meru</code> expands the effective pair max depth to <code>max_depth * 2</code> on the y-axis because the smudgeplot uses total coverage (<code>depth_a + depth_b</code>), not single-k-mer depth.</p>
+<p>Current limitation: <code>meru</code> stores k-mer counts in a standard in-memory <code>Hash(UInt64, UInt32)</code>. That keeps the implementation simple, but very large reference FASTA inputs such as whole human assemblies can exceed the hash capacity or available memory. In practice, <code>meru</code> is currently a better fit for read datasets and smaller references than for hg38-scale full-reference counting.</p>
 <p>Main outputs:</p>
 <ul>
 <li><code>sample.kmer_hist.tsv</code></li>
