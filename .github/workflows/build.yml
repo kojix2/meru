@@ -76,8 +76,8 @@ jobs:
         run: |
           docker run -d --name alpine -v $(pwd):/workspace -w /workspace crystallang/crystal:latest-alpine tail -f /dev/null
           docker exec alpine apk add make readline-dev readline-static ncurses-dev ncurses-static ncurses-libs
-          docker exec alpine make deps-prod
-          docker exec alpine make build release=1 static=1
+          docker exec --user "$(id -u):$(id -g)" alpine make deps-prod
+          docker exec --user "$(id -u):$(id -g)" alpine make build release=1 static=1
           docker exec alpine chmod +x bin/$BIN
           ldd bin/$BIN || echo "Static binary (no dynamic dependencies)"
           file bin/$BIN
@@ -92,14 +92,14 @@ jobs:
           chmod +x bin/$BIN
           otool -L bin/$BIN
           file bin/$BIN
-          make smoke
-          make package VERSION=$VERSION TARGET=${{ matrix.target }}
+          make smoke-built
+          make package-built VERSION=$VERSION TARGET=${{ matrix.target }}
 
       - name: Verify and test on Unix
         if: matrix.target == 'x86_64-unknown-linux-musl' || startsWith(matrix.target, 'x86_64-apple-darwin') || startsWith(matrix.target, 'aarch64-apple-darwin')
         shell: bash
         run: |
-          make smoke
+          make smoke-built
           make spec
 
       - name: Build on Windows (MSVC)
@@ -107,14 +107,14 @@ jobs:
         shell: pwsh
         run: |
           make build release=1 static=1 BIN_EXT=.exe
-          make smoke BIN_EXT=.exe
-          make package VERSION=$env:VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
+          make smoke-built BIN_EXT=.exe
+          make package-built VERSION=$env:VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
 
       - name: Verify and test on Windows (MSVC)
         if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          make smoke BIN_EXT=.exe
+          make smoke-built BIN_EXT=.exe
           make spec
 
       - name: Build on Windows (MinGW64)
@@ -123,14 +123,14 @@ jobs:
         run: |
           make build release=1 static=1 BIN_EXT=.exe
           file bin/$BIN.exe
-          make smoke BIN_EXT=.exe
-          make package VERSION=$VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
+          make smoke-built BIN_EXT=.exe
+          make package-built VERSION=$VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
 
       - name: Verify and test on Windows (MinGW64)
         if: matrix.target == 'x86_64-pc-windows-gnu'
         shell: msys2 {0}
         run: |
-          make smoke BIN_EXT=.exe
+          make smoke-built BIN_EXT=.exe
           make spec
 
       - name: Upload artifacts (non-release)

@@ -33,28 +33,20 @@ help:
 	@printf '%s\n' \
 	  'Targets:' \
 	  '  make build             Build bin/meru' \
-	  '  make deps-prod         Install production dependencies only' \
+	  '  make deps              Install dependencies' \
 	  '  make install           Install meru to ~/.local/bin' \
 	  '  make smoke             Run basic CLI smoke checks' \
-	  '  make smoke-built       Run smoke checks without rebuilding' \
 	  '  make spec              Run crystal spec' \
 	  '  make package           Archive the built binary with docs' \
-	  '  make package-built     Archive without rebuilding first' \
 	  '  make clean             Remove bin/meru' \
-	  '  make print-config      Show resolved build command' \
 	  '' \
 	  'Variables:' \
 	  '  release=1             Enable --release' \
 	  '  static=1              Enable --static' \
-	  '  BIN_EXT=.exe          Build/use a Windows binary name' \
-	  '  VERSION=... TARGET=... Used by make package' \
-	  '  ARCHIVE_FORMAT=zip    Create a zip instead of tar.gz' \
 	  '' \
 	  'Examples:' \
 	  '  make build release=1' \
 	  '  make install release=1' \
-	  '  make smoke BIN_EXT=.exe' \
-	  '  make package VERSION=v0.1.0 TARGET=x86_64-unknown-linux-musl' \
 	  '  make spec'
 
 deps:
