@@ -214,6 +214,7 @@
 <pre><code class="language-bash">bin/meru reads.fq.gz -k 21 -o sample</code></pre>
 <p>Tiny example:</p>
 <pre><code class="language-bash">bin/meru spec/fixtures/tiny.fastq -k 3 -o tiny</code></pre>
+<p><code>--max-depth</code> limits the k-mer coverage range used for histogram display and filtering. When a smudgeplot is shown, <code>meru</code> expands that limit to <code>max_depth * 2</code> on the y-axis because the smudgeplot uses total coverage (<code>depth_a + depth_b</code>), not single-k-mer depth.</p>
 <p>Main outputs:</p>
 <ul>
 <li><code>sample.kmer_hist.tsv</code></li>
