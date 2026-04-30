@@ -132,6 +132,11 @@
       
     </li>
   
+  <li class=" " data-id="meru/Meru/PairWorkerResult" data-name="meru::pairworkerresult">
+      <a href="../Meru/PairWorkerResult.html">PairWorkerResult</a>
+      
+    </li>
+  
   <li class="parent " data-id="meru/Meru/Plot" data-name="meru::plot">
       <a href="../Meru/Plot.html">Plot</a>
       
@@ -233,7 +238,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L5" target="_blank">
         meru/pairs.cr
       </a>
     
@@ -256,7 +261,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28bins%3AHash%28CoveragePair%2CUInt64%29%29-class-method" class="signature"><strong>.new</strong>(bins : Hash(CoveragePair, UInt64))</a>
+        <a href="#new%28bins%3AHash%28CoveragePair%2CUInt64%29%3DHash%28CoveragePair%2CUInt64%29.new%280_u64%29%29-class-method" class="signature"><strong>.new</strong>(bins : Hash(CoveragePair, UInt64) = <span class="t">Hash</span>(<span class="t">CoveragePair</span>, <span class="t">UInt64</span>).new(<span class="n">0_u64</span>))</a>
         
       </li>
     
@@ -279,12 +284,22 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
+        <a href="#add%28cov_a%3AUInt32%2Ccov_b%3AUInt32%2Ccount%3AUInt64%3D1_u64%29%3ANil-instance-method" class="signature"><strong>#add</strong>(cov_a : UInt32, cov_b : UInt32, count : UInt64 = <span class="n">1_u64</span>) : Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
         <a href="#bins%3AHash%28CoveragePair%2CUInt64%29-instance-method" class="signature"><strong>#bins</strong> : Hash(CoveragePair, UInt64)</a>
         
       </li>
     
       <li class="entry-summary">
         <a href="#empty%3F%3ABool-instance-method" class="signature"><strong>#empty?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#merge%21%28other%3APairTable%29%3ANil-instance-method" class="signature"><strong>#merge!</strong>(other : PairTable) : Nil</a>
         
       </li>
     
@@ -342,18 +357,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(bins:Hash(CoveragePair,UInt64))-class-method">
+    <div class="entry-detail" id="new(bins:Hash(CoveragePair,UInt64)=Hash(CoveragePair,UInt64).new(0_u64))-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(bins : Hash(<a href="../Meru/CoveragePair.html">CoveragePair</a>, UInt64))
+        def self.<strong>new</strong>(bins : Hash(<a href="../Meru/CoveragePair.html">CoveragePair</a>, UInt64) = <span class="t">Hash</span>(<span class="t">CoveragePair</span>, <span class="t">UInt64</span>).new(<span class="n">0_u64</span>))
 
-        <a class="method-permalink" href="#new%28bins%3AHash%28CoveragePair%2CUInt64%29%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28bins%3AHash%28CoveragePair%2CUInt64%29%3DHash%28CoveragePair%2CUInt64%29.new%280_u64%29%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -374,6 +389,22 @@
     Instance Method Detail
   </h2>
   
+    <div class="entry-detail" id="add(cov_a:UInt32,cov_b:UInt32,count:UInt64=1_u64):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>add</strong>(cov_a : UInt32, cov_b : UInt32, count : UInt64 = <span class="n">1_u64</span>) : Nil
+
+        <a class="method-permalink" href="#add%28cov_a%3AUInt32%2Ccov_b%3AUInt32%2Ccount%3AUInt64%3D1_u64%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
     <div class="entry-detail" id="bins:Hash(CoveragePair,UInt64)-instance-method">
       <div class="signature">
         
@@ -385,7 +416,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -401,7 +432,23 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="merge!(other:PairTable):Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>merge!</strong>(other : <a href="../Meru/PairTable.html">PairTable</a>) : Nil
+
+        <a class="method-permalink" href="#merge%21%28other%3APairTable%29%3ANil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L27" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -417,7 +464,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -433,7 +480,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/7300411114dbb02f2f2dfcaea0781022767df421/src/meru/pairs.cr#L20" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L33" target="_blank">View source</a>]
         
       </div>
     </div>

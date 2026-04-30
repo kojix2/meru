@@ -14,7 +14,7 @@
 <script type="text/javascript" src="../js/doc.js"></script>
 
   <meta name="repository-name" content="meru">
-  <title>Meru::DNA - meru main</title>
+  <title>Meru::PairWorkerResult - meru main</title>
   <script type="text/javascript">
     CrystalDocs.base_path = "../";
   </script>
@@ -82,7 +82,7 @@
       
     </li>
   
-  <li class=" current" data-id="meru/Meru/DNA" data-name="meru::dna">
+  <li class=" " data-id="meru/Meru/DNA" data-name="meru::dna">
       <a href="../Meru/DNA.html">DNA</a>
       
     </li>
@@ -132,7 +132,7 @@
       
     </li>
   
-  <li class=" " data-id="meru/Meru/PairWorkerResult" data-name="meru::pairworkerresult">
+  <li class=" current" data-id="meru/Meru/PairWorkerResult" data-name="meru::pairworkerresult">
       <a href="../Meru/PairWorkerResult.html">PairWorkerResult</a>
       
     </li>
@@ -202,8 +202,8 @@
 <h1 class="type-name">
 
   <span class="kind">
-    module
-  </span> Meru::<wbr>DNA
+    alias
+  </span> Meru::<wbr>PairWorkerResult
 
 </h1>
 
@@ -213,25 +213,21 @@
 
 
 
-
-
-
-
-
-
   <h2>
-    <a id="extended-modules" class="anchor" href="#extended-modules">
+    <a id="alias-definition" class="anchor" href="#alias-definition">
   <svg class="octicon-link" aria-hidden="true">
     <use href="#octicon-link"/>
   </svg>
 </a>
-    Extended Modules
+    Alias Definition
   </h2>
-  <ul class="other-types-list">
-    
-      <li class="other-type"><a href="../Meru/DNA.html">Meru::DNA</a></li>
-    
-  </ul>
+  <code>Exception | <a href="../Meru/PairTable.html">Meru::PairTable</a></code>
+
+
+
+
+
+
 
 
 
@@ -250,8 +246,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/dna.cr#L2" target="_blank">
-        meru/dna.cr
+      <a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/pairs.cr#L3" target="_blank">
+        meru/pairs.cr
       </a>
     
     <br/>
@@ -268,30 +264,6 @@
   
 
   
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#complement_bits%28bits%3AUInt64%29%3AUInt64-instance-method" class="signature"><strong>#complement_bits</strong>(bits : UInt64) : UInt64</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#encode_base%28byte%3AUInt8%29%3AUInt64%7CNil-instance-method" class="signature"><strong>#encode_base</strong>(byte : UInt8) : UInt64 | Nil</a>
-        
-          <div class="summary"><p>A/a =&gt; 0, C/c =&gt; 1, G/g =&gt; 2, T/t =&gt; 3.</p></div>
-        
-      </li>
-    
-  </ul>
-
 
 
   <div class="methods-inherited">
@@ -305,53 +277,6 @@
   
 
   
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="complement_bits(bits:UInt64):UInt64-instance-method">
-      <div class="signature">
-        
-        def <strong>complement_bits</strong>(bits : UInt64) : UInt64
-
-        <a class="method-permalink" href="#complement_bits%28bits%3AUInt64%29%3AUInt64-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/dna.cr#L19" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="encode_base(byte:UInt8):UInt64|Nil-instance-method">
-      <div class="signature">
-        
-        def <strong>encode_base</strong>(byte : UInt8) : UInt64 | Nil
-
-        <a class="method-permalink" href="#encode_base%28byte%3AUInt8%29%3AUInt64%7CNil-instance-method">#</a>
-      </div>
-      
-        <div class="doc">
-          
-          <p>A/a =&gt; 0, C/c =&gt; 1, G/g =&gt; 2, T/t =&gt; 3. Other bases are invalid.</p>
-        </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/66af9a939ce1c5ae047996eb3b6779bfc3357f52/src/meru/dna.cr#L6" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
 
 </div>
