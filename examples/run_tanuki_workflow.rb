@@ -242,7 +242,6 @@ def build_meru_cmd(args, read_path, prefix, no_plot: false)
     read_path,
     "-k", args[:k].to_s,
     "-o", prefix,
-    "--log-hist",
     "--plot-width", args[:width].to_s,
     "--plot-height", args[:height].to_s,
   ]

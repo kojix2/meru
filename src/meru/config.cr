@@ -30,7 +30,7 @@ module Meru
       @pair_min_depth : Int32? = nil,
       @pair_max_depth : Int32? = nil,
       @chunk_size : Int32 = 10_000,
-      @log_scale : Bool = false,
+      @log_scale : Bool = true,
       @linear_smudge : Bool = false,
       @plot_width : Int32 = 40,
       @plot_height : Int32 = 30,

@@ -48,8 +48,8 @@ module Meru
           config.plot = false
         end
 
-        opts.on("--log-hist", "use log10(count + 1) for the k-mer histogram") do
-          config.log_scale = true
+        opts.on("--linear-hist", "use linear counts for the k-mer histogram") do
+          config.log_scale = false
         end
 
         opts.on("--linear-smudge", "use linear pair counts for the smudgeplot") do

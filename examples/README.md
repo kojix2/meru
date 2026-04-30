@@ -142,8 +142,7 @@ bin/meru \
   -k 21 \
   -o examples/out/tanuki/meru/tanuki4 \
   --plot-width 100 \
-  --plot-height 24 \
-  --log-hist
+  --plot-height 24
 ```
 
 ## Notes
