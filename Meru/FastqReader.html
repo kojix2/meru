@@ -157,6 +157,16 @@
       
     </li>
   
+  <li class=" " data-id="meru/Meru/SequenceReader" data-name="meru::sequencereader">
+      <a href="../Meru/SequenceReader.html">SequenceReader</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/SequenceReadError" data-name="meru::sequencereaderror">
+      <a href="../Meru/SequenceReadError.html">SequenceReadError</a>
+      
+    </li>
+  
   <li class=" " data-id="meru/Meru/Signal" data-name="meru::signal">
       <a href="../Meru/Signal.html">Signal</a>
       
@@ -202,18 +212,26 @@
 <h1 class="type-name">
 
   <span class="kind">
-    class
+    alias
   </span> Meru::<wbr>FastqReader
 
 </h1>
 
 
-  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Meru/FastqReader.html">Meru::FastqReader</a></li><li class="superclass">Reference</li><li class="superclass">Object</li></ul>
 
 
 
 
 
+  <h2>
+    <a id="alias-definition" class="anchor" href="#alias-definition">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Alias Definition
+  </h2>
+  <code><a href="../Meru/SequenceReader.html">Meru::SequenceReader</a></code>
 
 
 
@@ -238,8 +256,8 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/meru/blob/51c218690e977434bac948460373929e85c7b449/src/meru/fastq.cr#L7" target="_blank">
-        meru/fastq.cr
+      <a href="https://github.com/kojix2/meru/blob/70a7ac9e97b9399c542040c624fcca6cbd98b149/src/meru/sequence.cr#L71" target="_blank">
+        meru/sequence.cr
       </a>
     
     <br/>
@@ -250,179 +268,25 @@
 
 
   
-  <h2>
-    <a id="constructors" class="anchor" href="#constructors">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructors
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#new%28path%3AString%29-class-method" class="signature"><strong>.new</strong>(path : String)</a>
-        
-      </li>
-    
-  </ul>
-
 
   
 
   
 
   
-  <h2>
-    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Summary
-  </h2>
-  <ul class="list-summary">
-    
-      <li class="entry-summary">
-        <a href="#each_sequence%28%26%3AIO%3A%3AMemory-%3E%29-instance-method" class="signature"><strong>#each_sequence</strong>(& : IO::Memory -> )</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#each_sequence_copy%28%26%3AString-%3E%29-instance-method" class="signature"><strong>#each_sequence_copy</strong>(& : String -> )</a>
-        
-      </li>
-    
-      <li class="entry-summary">
-        <a href="#path%3AString-instance-method" class="signature"><strong>#path</strong> : String</a>
-        
-      </li>
-    
-  </ul>
-
 
 
   <div class="methods-inherited">
     
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
-      
-
-
-      
-
-
-      
-
-
-      
-
-
-    
   </div>
 
   
-  <h2>
-    <a id="constructor-detail" class="anchor" href="#constructor-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Constructor Detail
-  </h2>
-  
-    <div class="entry-detail" id="new(path:String)-class-method">
-      <div class="signature">
-        
-        def self.<strong>new</strong>(path : String)
-
-        <a class="method-permalink" href="#new%28path%3AString%29-class-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/51c218690e977434bac948460373929e85c7b449/src/meru/fastq.cr#L10" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
   
 
   
 
   
-  <h2>
-    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
-  <svg class="octicon-link" aria-hidden="true">
-    <use href="#octicon-link"/>
-  </svg>
-</a>
-    Instance Method Detail
-  </h2>
-  
-    <div class="entry-detail" id="each_sequence(&amp;:IO::Memory-&gt;)-instance-method">
-      <div class="signature">
-        
-        def <strong>each_sequence</strong>(& : IO::Memory -> )
-
-        <a class="method-permalink" href="#each_sequence%28%26%3AIO%3A%3AMemory-%3E%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/51c218690e977434bac948460373929e85c7b449/src/meru/fastq.cr#L13" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="each_sequence_copy(&amp;:String-&gt;)-instance-method">
-      <div class="signature">
-        
-        def <strong>each_sequence_copy</strong>(& : String -> )
-
-        <a class="method-permalink" href="#each_sequence_copy%28%26%3AString-%3E%29-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/51c218690e977434bac948460373929e85c7b449/src/meru/fastq.cr#L23" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-    <div class="entry-detail" id="path:String-instance-method">
-      <div class="signature">
-        
-        def <strong>path</strong> : String
-
-        <a class="method-permalink" href="#path%3AString-instance-method">#</a>
-      </div>
-      
-      <br/>
-      <div>
-        
-          [<a href="https://github.com/kojix2/meru/blob/51c218690e977434bac948460373929e85c7b449/src/meru/fastq.cr#L8" target="_blank">View source</a>]
-        
-      </div>
-    </div>
-  
-
 
 
 </div>
