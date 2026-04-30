@@ -62,106 +62,75 @@ jobs:
 
       - name: Install dependencies
         if: matrix.target != 'x86_64-pc-windows-gnu'
-        run: shards install --without-development
+        run: make deps-prod
 
       - name: Install dependencies (MinGW64)
         if: matrix.target == 'x86_64-pc-windows-gnu'
         shell: msys2 {0}
-        run: shards install --without-development
+        run: make deps-prod
 
       - name: Build on Linux
         if: matrix.target == 'x86_64-unknown-linux-musl'
         shell: bash
         run: |
-          mkdir -p bin
           docker run -d --name alpine -v $(pwd):/workspace -w /workspace crystallang/crystal:latest-alpine tail -f /dev/null
-          docker exec alpine apk add readline-dev readline-static ncurses-dev ncurses-static ncurses-libs
-          docker exec alpine shards install --without-development --release --static
-          docker exec alpine shards build --release --static
+          docker exec alpine apk add make readline-dev readline-static ncurses-dev ncurses-static ncurses-libs
+          docker exec alpine make deps-prod
+          docker exec alpine make build release=1 static=1
           docker exec alpine chmod +x bin/$BIN
           ldd bin/$BIN || echo "Static binary (no dynamic dependencies)"
           file bin/$BIN
-          bin/$BIN --help
-          PKG=meru-${VERSION}-${{ matrix.target }}
-          mkdir -p $PKG
-          cp bin/$BIN $PKG/
-          cp LICENSE $PKG/
-          cp README.md $PKG/
-          tar czf $PKG.tar.gz $PKG
+          make smoke-built
+          make package-built VERSION=$VERSION TARGET=${{ matrix.target }}
 
       - name: Build on macOS
         if: startsWith(matrix.target, 'x86_64-apple-darwin') || startsWith(matrix.target, 'aarch64-apple-darwin')
         shell: bash
         run: |
-          mkdir -p bin
-          shards install --without-development --release
-          shards build --release
+          make build release=1
           chmod +x bin/$BIN
           otool -L bin/$BIN
           file bin/$BIN
-          bin/$BIN --help
-          PKG=meru-${VERSION}-${{ matrix.target }}
-          mkdir -p $PKG
-          cp bin/$BIN $PKG/
-          cp LICENSE $PKG/
-          cp README.md $PKG/
-          tar czf $PKG.tar.gz $PKG
+          make smoke
+          make package VERSION=$VERSION TARGET=${{ matrix.target }}
 
       - name: Verify and test on Unix
         if: matrix.target == 'x86_64-unknown-linux-musl' || startsWith(matrix.target, 'x86_64-apple-darwin') || startsWith(matrix.target, 'aarch64-apple-darwin')
         shell: bash
         run: |
-          mkdir -p bin
-          bin/$BIN --help
-          bin/$BIN spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
-          crystal spec
+          make smoke
+          make spec
 
       - name: Build on Windows (MSVC)
         if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          shards install --without-development --release
-          shards build --release --static --link-flags="-lucrt"
-          bin/$env:BIN.exe --help
-          $pkg = "meru-$env:VERSION-${{ matrix.target }}"
-          mkdir $pkg
-          Copy-Item "bin/$env:BIN.exe" "$pkg/"
-          Copy-Item "LICENSE" "$pkg/"
-          Copy-Item "README.md" "$pkg/"
-          Compress-Archive -Path "$pkg/*" -DestinationPath "$pkg.zip"
+          make build release=1 static=1 BIN_EXT=.exe
+          make smoke BIN_EXT=.exe
+          make package VERSION=$env:VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
 
       - name: Verify and test on Windows (MSVC)
         if: matrix.target == 'x86_64-pc-windows-msvc'
         shell: pwsh
         run: |
-          New-Item -ItemType Directory -Force bin | Out-Null
-          bin/$env:BIN.exe --help
-          bin/$env:BIN.exe spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
-          crystal spec
+          make smoke BIN_EXT=.exe
+          make spec
 
       - name: Build on Windows (MinGW64)
         if: matrix.target == 'x86_64-pc-windows-gnu'
         shell: msys2 {0}
         run: |
-          shards install --without-development --release
-          shards build --release --static
+          make build release=1 static=1 BIN_EXT=.exe
           file bin/$BIN.exe
-          bin/$BIN.exe --help
-          PKG=meru-${VERSION}-${{ matrix.target }}
-          mkdir -p $PKG
-          cp bin/$BIN.exe $PKG/
-          cp LICENSE $PKG/
-          cp README.md $PKG/
-          zip -r $PKG.zip $PKG
+          make smoke BIN_EXT=.exe
+          make package VERSION=$VERSION TARGET=${{ matrix.target }} BIN_EXT=.exe ARCHIVE_FORMAT=zip
 
       - name: Verify and test on Windows (MinGW64)
         if: matrix.target == 'x86_64-pc-windows-gnu'
         shell: msys2 {0}
         run: |
-          mkdir -p bin
-          bin/$BIN.exe --help
-          bin/$BIN.exe spec/fixtures/tiny.fastq -k 3 -o tiny-ci --no-plot
-          crystal spec
+          make smoke BIN_EXT=.exe
+          make spec
 
       - name: Upload artifacts (non-release)
         if: ${{ !startsWith(github.ref, 'refs/tags/') }}
