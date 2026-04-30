@@ -95,8 +95,8 @@ module Meru
 
         x_bins = width.clamp(10, Int32::MAX)
         y_bins = (height * 2).clamp(10, Int32::MAX)
-        y_max = max_total_cov.try(&.to_u32) || smudges.max_total_coverage
-        y_max = 1_u32 if y_max < 1_u32
+        y_max = max_total_cov.try(&.to_u64) || smudges.max_total_coverage
+        y_max = 1_u64 if y_max < 1_u64
         matrix = smudge_matrix(smudges, y_max, x_bins, y_bins)
 
         plot = ::UnicodePlot.heatmap(
@@ -123,7 +123,7 @@ module Meru
 
       private def smudge_matrix(
         smudges : SmudgeTable,
-        y_max : UInt32,
+        y_max : UInt64,
         x_bins : Int32,
         y_bins : Int32,
       ) : Array(Array(Float64))
@@ -132,7 +132,7 @@ module Meru
         smudges.bins.each do |key, count|
           minor = key[0]
           total = key[1]
-          next if total == 0_u32 || total > y_max
+          next if total == 0_u64 || total > y_max
 
           ratio = minor.to_f / total.to_f
           x = ((ratio / 0.5) * (x_bins - 1)).round.to_i
@@ -161,14 +161,14 @@ module Meru
 
         x_bins = width
         y_bins = height
-        y_max = max_total_cov.try(&.to_u32) || smudges.max_total_coverage
-        y_max = 1_u32 if y_max < 1_u32
+        y_max = max_total_cov.try(&.to_u64) || smudges.max_total_coverage
+        y_max = 1_u64 if y_max < 1_u64
 
         matrix = Array.new(y_bins) { Array.new(x_bins, 0_u64) }
         smudges.bins.each do |key, count|
           minor = key[0]
           total = key[1]
-          next if total == 0_u32 || total > y_max
+          next if total == 0_u64 || total > y_max
           ratio = minor.to_f / total.to_f
           x = ((ratio / 0.5) * (x_bins - 1)).round.to_i
           x = 0 if x < 0
@@ -185,7 +185,7 @@ module Meru
         label_width = y_max.to_s.size
 
         (y_bins - 1).downto(0) do |y|
-          cov_label = ((y.to_f / (y_bins - 1).to_f) * y_max.to_f).round.to_i
+          cov_label = ((y.to_f / (y_bins - 1).to_f) * y_max.to_f).round.to_u64
           line = String.build do |row_io|
             matrix[y].each do |value|
               idx = density_index(value, max_value, chars.size)

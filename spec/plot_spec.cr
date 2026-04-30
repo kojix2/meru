@@ -30,8 +30,8 @@ describe Meru::Plot do
 
   it "renders smudge as a heatmap-style plot" do
     bins = Hash(Meru::SmudgeKey, UInt64).new(0_u64)
-    bins[{13_u32, 26_u32}] = 20_u64
-    bins[{8_u32, 24_u32}] = 10_u64
+    bins[{13_u32, 26_u64}] = 20_u64
+    bins[{8_u32, 24_u64}] = 10_u64
     smudges = Meru::SmudgeTable.new(bins)
     io = IO::Memory.new
 

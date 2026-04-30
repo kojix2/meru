@@ -1,5 +1,5 @@
 module Meru
-  alias SmudgeKey = Tuple(UInt32, UInt32) # minor_cov, total_cov
+  alias SmudgeKey = Tuple(UInt32, UInt64) # minor_cov, total_cov
 
   class SmudgeTable
     getter bins : Hash(SmudgeKey, UInt64)
@@ -13,7 +13,7 @@ module Meru
         cov_a = coverage_pair[0]
         cov_b = coverage_pair[1]
         minor = cov_a < cov_b ? cov_a : cov_b
-        total = cov_a + cov_b
+        total = cov_a.to_u64 + cov_b.to_u64
         bins[{minor, total}] += count
       end
       SmudgeTable.new(bins)
@@ -25,8 +25,8 @@ module Meru
       total
     end
 
-    def max_total_coverage : UInt32
-      max = 0_u32
+    def max_total_coverage : UInt64
+      max = 0_u64
       @bins.each_key do |key|
         total = key[1]
         max = total if total > max

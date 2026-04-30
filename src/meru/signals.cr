@@ -40,13 +40,13 @@ module Meru
       end
     end
 
-    private def classify(ratio : Float64, total_cov : UInt32, peak_coverage : UInt32) : String?
+    private def classify(ratio : Float64, total_cov : UInt64, peak_coverage : UInt32) : String?
       if close?(ratio, 1.0 / 3.0, 0.04)
         "AAB"
       elsif close?(ratio, 0.25, 0.035)
         "AAAB"
       elsif close?(ratio, 0.5, 0.04)
-        if peak_coverage > 0 && total_cov > (peak_coverage.to_f * 1.5).round.to_u32
+        if peak_coverage > 0 && total_cov > (peak_coverage.to_f * 1.5).round.to_u64
           "AABB"
         else
           "AB"
