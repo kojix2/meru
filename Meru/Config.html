@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="meru">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="meru">
+  <title>Meru::Config - meru main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          meru
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="meru/Meru" data-name="meru">
+      <a href="../Meru.html">Meru</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/CLI" data-name="meru::cli">
+      <a href="../Meru/CLI.html">CLI</a>
+      
+    </li>
+  
+  <li class=" current" data-id="meru/Meru/Config" data-name="meru::config">
+      <a href="../Meru/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Counter" data-name="meru::counter">
+      <a href="../Meru/Counter.html">Counter</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/CoveragePair" data-name="meru::coveragepair">
+      <a href="../Meru/CoveragePair.html">CoveragePair</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/DNA" data-name="meru::dna">
+      <a href="../Meru/DNA.html">DNA</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/FastqError" data-name="meru::fastqerror">
+      <a href="../Meru/FastqError.html">FastqError</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/FastqReader" data-name="meru::fastqreader">
+      <a href="../Meru/FastqReader.html">FastqReader</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Histogram" data-name="meru::histogram">
+      <a href="../Meru/Histogram.html">Histogram</a>
+      
+    </li>
+  
+  <li class="parent " data-id="meru/Meru/Kmer" data-name="meru::kmer">
+      <a href="../Meru/Kmer.html">Kmer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/Kmer/Encoded" data-name="meru::kmer::encoded">
+      <a href="../Meru/Kmer/Encoded.html">Encoded</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/KmerCounts" data-name="meru::kmercounts">
+      <a href="../Meru/KmerCounts.html">KmerCounts</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/PairExtractor" data-name="meru::pairextractor">
+      <a href="../Meru/PairExtractor.html">PairExtractor</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/PairTable" data-name="meru::pairtable">
+      <a href="../Meru/PairTable.html">PairTable</a>
+      
+    </li>
+  
+  <li class="parent " data-id="meru/Meru/Plot" data-name="meru::plot">
+      <a href="../Meru/Plot.html">Plot</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/Plot/Text" data-name="meru::plot::text">
+      <a href="../Meru/Plot/Text.html">Text</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Plot/Unicode" data-name="meru::plot::unicode">
+      <a href="../Meru/Plot/Unicode.html">Unicode</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Signal" data-name="meru::signal">
+      <a href="../Meru/Signal.html">Signal</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Signals" data-name="meru::signals">
+      <a href="../Meru/Signals.html">Signals</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/SmudgeKey" data-name="meru::smudgekey">
+      <a href="../Meru/SmudgeKey.html">SmudgeKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/SmudgeTable" data-name="meru::smudgetable">
+      <a href="../Meru/SmudgeTable.html">SmudgeTable</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Summary" data-name="meru::summary">
+      <a href="../Meru/Summary.html">Summary</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    struct
+  </span> Meru::<wbr>Config
+
+</h1>
+
+
+  <ul class="superclass-hierarchy"><li class="superclass"><a href="../Meru/Config.html">Meru::Config</a></li><li class="superclass">Struct</li><li class="superclass">Value</li><li class="superclass">Object</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L4" target="_blank">
+        meru/config.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+
+
+  
+  <h2>
+    <a id="constructors" class="anchor" href="#constructors">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructors
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D1%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%3D2%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method" class="signature"><strong>.new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">1</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 = <span class="n">2</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)</a>
+        
+      </li>
+    
+  </ul>
+
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#hist_only%3D%28hist_only%3ABool%29-instance-method" class="signature"><strong>#hist_only=</strong>(hist_only : Bool)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#hist_only%3F%3ABool-instance-method" class="signature"><strong>#hist_only?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input_paths%3AArray%28String%29-instance-method" class="signature"><strong>#input_paths</strong> : Array(String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#input_paths%3D%28input_paths%3AArray%28String%29%29-instance-method" class="signature"><strong>#input_paths=</strong>(input_paths : Array(String))</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#k%3AInt32-instance-method" class="signature"><strong>#k</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#k%3D%28k%3AInt32%29-instance-method" class="signature"><strong>#k=</strong>(k : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#log_scale%3D%28log_scale%3ABool%29-instance-method" class="signature"><strong>#log_scale=</strong>(log_scale : Bool)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#log_scale%3F%3ABool-instance-method" class="signature"><strong>#log_scale?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_depth%3AInt32%7CNil-instance-method" class="signature"><strong>#max_depth</strong> : Int32 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#max_depth%3D%28max_depth%3AInt32%7CNil%29-instance-method" class="signature"><strong>#max_depth=</strong>(max_depth : Int32 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min_depth%3AInt32-instance-method" class="signature"><strong>#min_depth</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#min_depth%3D%28min_depth%3AInt32%29-instance-method" class="signature"><strong>#min_depth=</strong>(min_depth : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output_prefix%3AString-instance-method" class="signature"><strong>#output_prefix</strong> : String</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#output_prefix%3D%28output_prefix%3AString%29-instance-method" class="signature"><strong>#output_prefix=</strong>(output_prefix : String)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pair_max_depth%3AInt32%7CNil-instance-method" class="signature"><strong>#pair_max_depth</strong> : Int32 | Nil</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pair_max_depth%3D%28pair_max_depth%3AInt32%7CNil%29-instance-method" class="signature"><strong>#pair_max_depth=</strong>(pair_max_depth : Int32 | Nil)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pair_min_depth%3AInt32-instance-method" class="signature"><strong>#pair_min_depth</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#pair_min_depth%3D%28pair_min_depth%3AInt32%29-instance-method" class="signature"><strong>#pair_min_depth=</strong>(pair_min_depth : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot%3D%28plot%3ABool%29-instance-method" class="signature"><strong>#plot=</strong>(plot : Bool)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot%3F%3ABool-instance-method" class="signature"><strong>#plot?</strong> : Bool</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot_height%3AInt32-instance-method" class="signature"><strong>#plot_height</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot_height%3D%28plot_height%3AInt32%29-instance-method" class="signature"><strong>#plot_height=</strong>(plot_height : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot_width%3AInt32-instance-method" class="signature"><strong>#plot_width</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#plot_width%3D%28plot_width%3AInt32%29-instance-method" class="signature"><strong>#plot_width=</strong>(plot_width : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#threads%3AInt32-instance-method" class="signature"><strong>#threads</strong> : Int32</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#threads%3D%28threads%3AInt32%29-instance-method" class="signature"><strong>#threads=</strong>(threads : Int32)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+      
+
+
+      
+
+
+      
+
+
+      
+
+
+    
+  </div>
+
+  
+  <h2>
+    <a id="constructor-detail" class="anchor" href="#constructor-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Constructor Detail
+  </h2>
+  
+    <div class="entry-detail" id="new(k:Int32=21,output_prefix:String=&quot;meru&quot;,threads:Int32=1,min_depth:Int32=1,max_depth:Int32|Nil=nil,plot:Bool=true,input_paths:Array(String)=[]ofString,hist_only:Bool=false,pair_min_depth:Int32=2,pair_max_depth:Int32|Nil=nil,log_scale:Bool=false,plot_width:Int32=80,plot_height:Int32=20)-class-method">
+      <div class="signature">
+        
+        def self.<strong>new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">1</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 = <span class="n">2</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)
+
+        <a class="method-permalink" href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D1%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%3D2%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L19" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="hist_only=(hist_only:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>hist_only=</strong>(hist_only : Bool)
+
+        <a class="method-permalink" href="#hist_only%3D%28hist_only%3ABool%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="hist_only?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>hist_only?</strong> : Bool
+
+        <a class="method-permalink" href="#hist_only%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L12" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input_paths:Array(String)-instance-method">
+      <div class="signature">
+        
+        def <strong>input_paths</strong> : Array(String)
+
+        <a class="method-permalink" href="#input_paths%3AArray%28String%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="input_paths=(input_paths:Array(String))-instance-method">
+      <div class="signature">
+        
+        def <strong>input_paths=</strong>(input_paths : Array(String))
+
+        <a class="method-permalink" href="#input_paths%3D%28input_paths%3AArray%28String%29%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L11" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="k:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>k</strong> : Int32
+
+        <a class="method-permalink" href="#k%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="k=(k:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>k=</strong>(k : Int32)
+
+        <a class="method-permalink" href="#k%3D%28k%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="log_scale=(log_scale:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>log_scale=</strong>(log_scale : Bool)
+
+        <a class="method-permalink" href="#log_scale%3D%28log_scale%3ABool%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="log_scale?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>log_scale?</strong> : Bool
+
+        <a class="method-permalink" href="#log_scale%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_depth:Int32|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>max_depth</strong> : Int32 | Nil
+
+        <a class="method-permalink" href="#max_depth%3AInt32%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="max_depth=(max_depth:Int32|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>max_depth=</strong>(max_depth : Int32 | Nil)
+
+        <a class="method-permalink" href="#max_depth%3D%28max_depth%3AInt32%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min_depth:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>min_depth</strong> : Int32
+
+        <a class="method-permalink" href="#min_depth%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="min_depth=(min_depth:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>min_depth=</strong>(min_depth : Int32)
+
+        <a class="method-permalink" href="#min_depth%3D%28min_depth%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L8" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output_prefix:String-instance-method">
+      <div class="signature">
+        
+        def <strong>output_prefix</strong> : String
+
+        <a class="method-permalink" href="#output_prefix%3AString-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="output_prefix=(output_prefix:String)-instance-method">
+      <div class="signature">
+        
+        def <strong>output_prefix=</strong>(output_prefix : String)
+
+        <a class="method-permalink" href="#output_prefix%3D%28output_prefix%3AString%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L6" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pair_max_depth:Int32|Nil-instance-method">
+      <div class="signature">
+        
+        def <strong>pair_max_depth</strong> : Int32 | Nil
+
+        <a class="method-permalink" href="#pair_max_depth%3AInt32%7CNil-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pair_max_depth=(pair_max_depth:Int32|Nil)-instance-method">
+      <div class="signature">
+        
+        def <strong>pair_max_depth=</strong>(pair_max_depth : Int32 | Nil)
+
+        <a class="method-permalink" href="#pair_max_depth%3D%28pair_max_depth%3AInt32%7CNil%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L14" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pair_min_depth:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>pair_min_depth</strong> : Int32
+
+        <a class="method-permalink" href="#pair_min_depth%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="pair_min_depth=(pair_min_depth:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>pair_min_depth=</strong>(pair_min_depth : Int32)
+
+        <a class="method-permalink" href="#pair_min_depth%3D%28pair_min_depth%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L13" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot=(plot:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>plot=</strong>(plot : Bool)
+
+        <a class="method-permalink" href="#plot%3D%28plot%3ABool%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>plot?</strong> : Bool
+
+        <a class="method-permalink" href="#plot%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L10" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot_height:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>plot_height</strong> : Int32
+
+        <a class="method-permalink" href="#plot_height%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot_height=(plot_height:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>plot_height=</strong>(plot_height : Int32)
+
+        <a class="method-permalink" href="#plot_height%3D%28plot_height%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L17" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot_width:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>plot_width</strong> : Int32
+
+        <a class="method-permalink" href="#plot_width%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="plot_width=(plot_width:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>plot_width=</strong>(plot_width : Int32)
+
+        <a class="method-permalink" href="#plot_width%3D%28plot_width%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="threads:Int32-instance-method">
+      <div class="signature">
+        
+        def <strong>threads</strong> : Int32
+
+        <a class="method-permalink" href="#threads%3AInt32-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="threads=(threads:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>threads=</strong>(threads : Int32)
+
+        <a class="method-permalink" href="#threads%3D%28threads%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/config.cr#L7" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>

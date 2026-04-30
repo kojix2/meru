@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Crystal Docs 1.19.1">
+<meta name="crystal_docs.project_version" content="main">
+<meta name="crystal_docs.project_name" content="meru">
+
+
+
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../js/doc.js"></script>
+
+  <meta name="repository-name" content="meru">
+  <title>Meru::Kmer - meru main</title>
+  <script type="text/javascript">
+    CrystalDocs.base_path = "../";
+  </script>
+</head>
+<body>
+
+<svg class="hidden">
+  <symbol id="octicon-link" viewBox="0 0 16 16">
+    <path fill="currentColor" fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path>
+  </symbol>
+</svg>
+<input type="checkbox" id="sidebar-btn">
+<label for="sidebar-btn" id="sidebar-btn-label">
+  <svg class="open" xmlns="http://www.w3.org/2000/svg" height="2em" width="2em" viewBox="0 0 512 512"><title>Open Sidebar</title><path fill="currentColor" d="M80 96v64h352V96H80zm0 112v64h352v-64H80zm0 112v64h352v-64H80z"></path></svg>
+  <svg class="close" xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 512 512"><title>Close Sidebar</title><path fill="currentColor" d="m118.6 73.4-45.2 45.2L210.7 256 73.4 393.4l45.2 45.2L256 301.3l137.4 137.3 45.2-45.2L301.3 256l137.3-137.4-45.2-45.2L256 210.7Z"></path></svg>
+</label>
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="search-box">
+      <input type="search" class="search-input" placeholder="Search..." spellcheck="false" aria-label="Search">
+    </div>
+
+    <div class="project-summary">
+      <h1 class="project-name">
+        <a href="../index.html">
+          meru
+        </a>
+      </h1>
+
+      <span class="project-version">
+        main
+      </span>
+    </div>
+  </div>
+
+  <div class="search-results hidden">
+    <ul class="search-list"></ul>
+  </div>
+
+  <div class="types-list">
+    <ul>
+  
+  <li class="parent open current" data-id="meru/Meru" data-name="meru">
+      <a href="../Meru.html">Meru</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/CLI" data-name="meru::cli">
+      <a href="../Meru/CLI.html">CLI</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Config" data-name="meru::config">
+      <a href="../Meru/Config.html">Config</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Counter" data-name="meru::counter">
+      <a href="../Meru/Counter.html">Counter</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/CoveragePair" data-name="meru::coveragepair">
+      <a href="../Meru/CoveragePair.html">CoveragePair</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/DNA" data-name="meru::dna">
+      <a href="../Meru/DNA.html">DNA</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/FastqError" data-name="meru::fastqerror">
+      <a href="../Meru/FastqError.html">FastqError</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/FastqReader" data-name="meru::fastqreader">
+      <a href="../Meru/FastqReader.html">FastqReader</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Histogram" data-name="meru::histogram">
+      <a href="../Meru/Histogram.html">Histogram</a>
+      
+    </li>
+  
+  <li class="parent open current" data-id="meru/Meru/Kmer" data-name="meru::kmer">
+      <a href="../Meru/Kmer.html">Kmer</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/Kmer/Encoded" data-name="meru::kmer::encoded">
+      <a href="../Meru/Kmer/Encoded.html">Encoded</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/KmerCounts" data-name="meru::kmercounts">
+      <a href="../Meru/KmerCounts.html">KmerCounts</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/PairExtractor" data-name="meru::pairextractor">
+      <a href="../Meru/PairExtractor.html">PairExtractor</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/PairTable" data-name="meru::pairtable">
+      <a href="../Meru/PairTable.html">PairTable</a>
+      
+    </li>
+  
+  <li class="parent " data-id="meru/Meru/Plot" data-name="meru::plot">
+      <a href="../Meru/Plot.html">Plot</a>
+      
+        <ul>
+  
+  <li class=" " data-id="meru/Meru/Plot/Text" data-name="meru::plot::text">
+      <a href="../Meru/Plot/Text.html">Text</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Plot/Unicode" data-name="meru::plot::unicode">
+      <a href="../Meru/Plot/Unicode.html">Unicode</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Signal" data-name="meru::signal">
+      <a href="../Meru/Signal.html">Signal</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Signals" data-name="meru::signals">
+      <a href="../Meru/Signals.html">Signals</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/SmudgeKey" data-name="meru::smudgekey">
+      <a href="../Meru/SmudgeKey.html">SmudgeKey</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/SmudgeTable" data-name="meru::smudgetable">
+      <a href="../Meru/SmudgeTable.html">SmudgeTable</a>
+      
+    </li>
+  
+  <li class=" " data-id="meru/Meru/Summary" data-name="meru::summary">
+      <a href="../Meru/Summary.html">Summary</a>
+      
+    </li>
+  
+</ul>
+
+      
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div class="main-content">
+<h1 class="type-name">
+
+  <span class="kind">
+    module
+  </span> Meru::<wbr>Kmer
+
+</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="extended-modules" class="anchor" href="#extended-modules">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Extended Modules
+  </h2>
+  <ul class="other-types-list">
+    
+      <li class="other-type"><a href="../Meru/Kmer.html">Meru::Kmer</a></li>
+    
+  </ul>
+
+
+
+
+
+
+
+
+  <h2>
+    <a id="defined-in" class="anchor" href="#defined-in">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Defined in:
+  </h2>
+  
+    
+      <a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L2" target="_blank">
+        meru/kmer.cr
+      </a>
+    
+    <br/>
+  
+
+
+
+  
+    <h2>
+      <a id="constant-summary" class="anchor" href="#constant-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+      Constant Summary
+    </h2>
+  
+  <dl>
+    
+      <dt class="entry-const" id="MAX_K">
+        <strong>MAX_K</strong> = <code><span class="n">32</span></code>
+      </dt>
+      
+    
+  </dl>
+
+
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-summary" class="anchor" href="#instance-method-summary">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Summary
+  </h2>
+  <ul class="list-summary">
+    
+      <li class="entry-summary">
+        <a href="#canonical%28forward%3AEncoded%2Creverse_complement%3AEncoded%29%3AEncoded-instance-method" class="signature"><strong>#canonical</strong>(forward : Encoded, reverse_complement : Encoded) : Encoded</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_canonical%28seq%3AString%7CIO%3A%3AMemory%2Ck%3AInt32%2C%26%3AEncoded-%3E%29-instance-method" class="signature"><strong>#each_canonical</strong>(seq : String | IO::Memory, k : Int32, & : Encoded -> )</a>
+        
+          <div class="summary"><p>Rolling 2-bit encoding keeps the implementation compact while avoiding re-encoding every window from scratch.</p></div>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#each_canonical_bytes%28bytes%3ABytes%2Ck%3AInt32%2C%26%3AEncoded-%3E%29-instance-method" class="signature"><strong>#each_canonical_bytes</strong>(bytes : Bytes, k : Int32, & : Encoded -> )</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#reverse_complement%28kmer%3AEncoded%2Ck%3AInt32%29%3AEncoded-instance-method" class="signature"><strong>#reverse_complement</strong>(kmer : Encoded, k : Int32) : Encoded</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#validate_k%21%28k%3AInt32%29-instance-method" class="signature"><strong>#validate_k!</strong>(k : Int32)</a>
+        
+      </li>
+    
+  </ul>
+
+
+
+  <div class="methods-inherited">
+    
+  </div>
+
+  
+
+  
+
+  
+
+  
+  <h2>
+    <a id="instance-method-detail" class="anchor" href="#instance-method-detail">
+  <svg class="octicon-link" aria-hidden="true">
+    <use href="#octicon-link"/>
+  </svg>
+</a>
+    Instance Method Detail
+  </h2>
+  
+    <div class="entry-detail" id="canonical(forward:Encoded,reverse_complement:Encoded):Encoded-instance-method">
+      <div class="signature">
+        
+        def <strong>canonical</strong>(forward : <a href="../Meru/Kmer/Encoded.html">Encoded</a>, reverse_complement : <a href="../Meru/Kmer/Encoded.html">Encoded</a>) : <a href="../Meru/Kmer/Encoded.html">Encoded</a>
+
+        <a class="method-permalink" href="#canonical%28forward%3AEncoded%2Creverse_complement%3AEncoded%29%3AEncoded-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L49" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_canonical(seq:String|IO::Memory,k:Int32,&amp;:Encoded-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_canonical</strong>(seq : String | IO::Memory, k : Int32, & : <a href="../Meru/Kmer/Encoded.html">Encoded</a> -> )
+
+        <a class="method-permalink" href="#each_canonical%28seq%3AString%7CIO%3A%3AMemory%2Ck%3AInt32%2C%26%3AEncoded-%3E%29-instance-method">#</a>
+      </div>
+      
+        <div class="doc">
+          
+          <p>Rolling 2-bit encoding keeps the implementation compact while avoiding
+re-encoding every window from scratch.</p>
+        </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L15" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="each_canonical_bytes(bytes:Bytes,k:Int32,&amp;:Encoded-&gt;)-instance-method">
+      <div class="signature">
+        
+        def <strong>each_canonical_bytes</strong>(bytes : Bytes, k : Int32, & : <a href="../Meru/Kmer/Encoded.html">Encoded</a> -> )
+
+        <a class="method-permalink" href="#each_canonical_bytes%28bytes%3ABytes%2Ck%3AInt32%2C%26%3AEncoded-%3E%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L21" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="reverse_complement(kmer:Encoded,k:Int32):Encoded-instance-method">
+      <div class="signature">
+        
+        def <strong>reverse_complement</strong>(kmer : <a href="../Meru/Kmer/Encoded.html">Encoded</a>, k : Int32) : <a href="../Meru/Kmer/Encoded.html">Encoded</a>
+
+        <a class="method-permalink" href="#reverse_complement%28kmer%3AEncoded%2Ck%3AInt32%29%3AEncoded-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L53" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="validate_k!(k:Int32)-instance-method">
+      <div class="signature">
+        
+        def <strong>validate_k!</strong>(k : Int32)
+
+        <a class="method-permalink" href="#validate_k%21%28k%3AInt32%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/255c12484930591f20e10c7311145022b325783b/src/meru/kmer.cr#L9" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+
+
+
+</div>
+
+</body>
+</html>
