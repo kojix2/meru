@@ -29,7 +29,7 @@ module Meru
         opts.separator("")
         opts.separator("Analysis:")
 
-        opts.on("--min-depth INT", "minimum k-mer depth to include (default: 1)") do |v|
+        opts.on("--min-depth INT", "minimum k-mer depth to include (default: 2)") do |v|
           config.min_depth = v.to_i
         end
 
@@ -63,11 +63,11 @@ module Meru
         opts.separator("")
         opts.separator("Advanced:")
 
-        opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: 2)") do |v|
+        opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: --min-depth)") do |v|
           config.pair_min_depth = v.to_i
         end
 
-        opts.on("--pair-max-depth INT", "maximum k-mer depth for pair extraction") do |v|
+        opts.on("--pair-max-depth INT", "maximum k-mer depth for pair extraction (default: --max-depth)") do |v|
           config.pair_max_depth = v.to_i
         end
 
@@ -117,7 +117,12 @@ module Meru
       signals = nil.as(Array(Signal)?)
 
       unless config.hist_only?
-        pairs_local = PairExtractor.extract(counter.counts, config.k, config.pair_min_depth, config.pair_max_depth)
+        pairs_local = PairExtractor.extract(
+          counter.counts,
+          config.k,
+          config.effective_pair_min_depth,
+          config.effective_pair_max_depth
+        )
         pairs = pairs_local
         pairs_path = "#{config.output_prefix}.pairs.tsv"
         pairs_local.write_tsv(pairs_path)
@@ -169,9 +174,11 @@ module Meru
       if max_depth = config.max_depth
         raise ArgumentError.new("max depth must be >= min depth") if max_depth < config.min_depth
       end
-      raise ArgumentError.new("pair min depth must be >= 1") if config.pair_min_depth < 1
+      if pair_min_depth = config.pair_min_depth
+        raise ArgumentError.new("pair min depth must be >= 1") if pair_min_depth < 1
+      end
       if pair_max_depth = config.pair_max_depth
-        raise ArgumentError.new("pair max depth must be >= pair min depth") if pair_max_depth < config.pair_min_depth
+        raise ArgumentError.new("pair max depth must be >= pair min depth") if pair_max_depth < config.effective_pair_min_depth
       end
       raise ArgumentError.new("plot width must be >= 1") if config.plot_width < 1
       raise ArgumentError.new("plot height must be >= 1") if config.plot_height < 1

@@ -12,8 +12,9 @@ module Meru
         io.puts "Parameters:"
         io.puts "  k: #{config.k}"
         io.puts "  threads: #{config.threads}"
-        io.puts "  pair min depth: #{config.pair_min_depth}"
-        io.puts "  pair max depth: #{config.pair_max_depth || "auto"}"
+        io.puts "  depth range: #{config.min_depth}..#{config.max_depth || hist.max_coverage}"
+        io.puts "  pair min depth: #{config.effective_pair_min_depth}"
+        io.puts "  pair max depth: #{config.effective_pair_max_depth || "auto"}"
         io.puts
         io.puts "K-mer count:"
         io.puts "  total reads: #{counter.total_reads}"

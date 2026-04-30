@@ -12,3 +12,5 @@
 *.pyc
 /.ruby-lsp/
 .codex
+
+.crystal-cache/

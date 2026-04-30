@@ -1,6 +1,17 @@
 require "./spec_helper"
 
 describe Meru::PairExtractor do
+  it "uses depth 2 as the default minimum depth" do
+    counts = Meru::KmerCounts.new(0_u32)
+    a = 0b0000_u64 # AA, canonical
+    b = 0b0001_u64 # AC, canonical
+    counts[a] = 1_u32
+    counts[b] = 2_u32
+
+    pairs = Meru::PairExtractor.extract(counts, 2)
+    pairs.total_pairs.should eq 0_u64
+  end
+
   it "aggregates one-base-different k-mer pairs by coverage" do
     counts = Meru::KmerCounts.new(0_u32)
     a = 0b0000_u64 # AA, canonical
