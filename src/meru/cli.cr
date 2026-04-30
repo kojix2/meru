@@ -171,7 +171,7 @@ module Meru
 
       STDERR.puts "wrote #{hist_path}"
       STDERR.puts "wrote #{summary_path}"
-    rescue ex : ArgumentError | FastqError | File::Error
+    rescue ex : ArgumentError | SequenceReadError | File::Error
       STDERR.puts "error: #{ex.message}"
       exit 1
     end

@@ -49,7 +49,7 @@ module Meru
     def self.count_files(paths : Array(String), k : Int32) : Counter
       counter = Counter.new(k)
       paths.each do |path|
-        FastqReader.new(path).each_sequence do |seq|
+        SequenceReader.new(path).each_sequence do |seq|
           counter.add_sequence(seq)
         end
       end
@@ -82,7 +82,7 @@ module Meru
 
       paths.each do |path|
         chunk = [] of String
-        FastqReader.new(path).each_sequence_copy do |seq|
+        SequenceReader.new(path).each_sequence_copy do |seq|
           chunk << seq
           if chunk.size >= chunk_size
             jobs.send(chunk)
