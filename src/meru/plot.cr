@@ -4,8 +4,8 @@ module Meru
   module Plot
     extend self
 
-    DEFAULT_PLOT_WIDTH  = 72
-    DEFAULT_PLOT_HEIGHT = 18
+    DEFAULT_PLOT_WIDTH  = 40
+    DEFAULT_PLOT_HEIGHT = 30
 
     def histogram(
       hist : Histogram,
@@ -68,6 +68,9 @@ module Meru
         end
 
         ylabel = log_y ? "log10(distinct k-mers + 1)" : "distinct k-mers"
+        # UnicodePlot heatmaps effectively use 2 vertical subpixels per text row,
+        # while braille line plots use 4. Halve the requested height here so a
+        # shared --plot-height feels consistent between histogram and smudgeplot.
         plot = ::UnicodePlot.lineplot(
           x,
           y,
@@ -75,7 +78,7 @@ module Meru
           xlabel: "coverage",
           ylabel: ylabel,
           width: width,
-          height: height,
+          height: histogram_char_height(height),
           canvas: :braille,
         )
         io.puts plot
@@ -84,6 +87,10 @@ module Meru
       private def histogram_value(count : UInt64, log_y : Bool) : Float64
         value = count.to_f
         log_y ? Math.log10(value + 1.0) : value
+      end
+
+      private def histogram_char_height(height : Int32) : Int32
+        Math.max(2, (height + 1) // 2)
       end
 
       def smudge(

@@ -56,11 +56,11 @@ module Meru
           config.linear_smudge = true
         end
 
-        opts.on("--plot-width INT", "plot width (default: 80)") do |v|
+        opts.on("--plot-width INT", "plot width (default: 40)") do |v|
           config.plot_width = v.to_i
         end
 
-        opts.on("--plot-height INT", "plot height (default: 20)") do |v|
+        opts.on("--plot-height INT", "plot height (default: 30)") do |v|
           config.plot_height = v.to_i
         end
 
@@ -177,7 +177,7 @@ module Meru
     end
 
     private def validate_config!(config : Config)
-      raise ArgumentError.new("no input FASTQ files given") if config.input_paths.empty?
+      raise ArgumentError.new("no input FASTA/FASTQ files given") if config.input_paths.empty?
       Kmer.validate_k!(config.k)
       raise ArgumentError.new("threads must be >= 1") if config.threads < 1
       raise ArgumentError.new("min depth must be >= 1") if config.min_depth < 1

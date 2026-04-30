@@ -28,6 +28,18 @@ describe Meru::Plot do
     io.to_s.should contain("log10(distinct k-mers + 1)")
   end
 
+  it "uses a shorter braille canvas height so histogram and smudge sizing match visually" do
+    counts = Meru::KmerCounts.new(0_u32)
+    counts[1_u64] = 10_u32
+    hist = Meru::Histogram.from_counts(counts)
+    io = IO::Memory.new
+
+    Meru::Plot.histogram(hist, 1, nil, false, io, 40, 12)
+
+    plot_lines = io.to_s.lines.reject(&.empty?)
+    plot_lines.size.should be < 12
+  end
+
   it "renders smudge as a heatmap-style plot" do
     bins = Hash(Meru::SmudgeKey, UInt64).new(0_u64)
     bins[{13_u32, 26_u64}] = 20_u64

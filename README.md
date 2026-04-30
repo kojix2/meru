@@ -32,6 +32,8 @@ Tiny example:
 bin/meru spec/fixtures/tiny.fastq -k 3 -o tiny
 ```
 
+Inputs can be FASTQ (`.fq`, `.fastq`, optionally `.gz`) or FASTA (`.fa`, `.fasta`, optionally `.gz`), detected by filename extension.
+
 `--min-depth` and `--max-depth` define the histogram depth range. Pair extraction uses `max(2, --min-depth)` and `--max-depth` by default, so singleton error k-mers stay out of the smudge workflow unless you opt in explicitly. `--pair-min-depth` and `--pair-max-depth` override only the pair-extraction range. When a smudgeplot is shown, `meru` expands the effective pair max depth to `max_depth * 2` on the y-axis because the smudgeplot uses total coverage (`depth_a + depth_b`), not single-k-mer depth.
 
 Current limitation: `meru` stores k-mer counts in a standard in-memory `Hash(UInt64, UInt32)`. That keeps the implementation simple, but very large reference FASTA inputs such as whole human assemblies can exceed the hash capacity or available memory. In practice, `meru` is currently a better fit for read datasets and smaller references than for hg38-scale full-reference counting.
