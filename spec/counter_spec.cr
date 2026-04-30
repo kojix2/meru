@@ -24,4 +24,15 @@ describe Meru::Counter do
       Meru::Counter.count_files_parallel([] of String, 0, 2)
     end
   end
+
+  it "produces the same counts across parallel chunk sizes" do
+    paths = [File.expand_path("fixtures/tiny.fastq", __DIR__)]
+
+    chunk1 = Meru::Counter.count_files_parallel(paths, 3, 2, 1)
+    chunk10 = Meru::Counter.count_files_parallel(paths, 3, 2, 10)
+
+    chunk1.counts.should eq(chunk10.counts)
+    chunk1.total_reads.should eq(chunk10.total_reads)
+    chunk1.valid_kmers.should eq(chunk10.valid_kmers)
+  end
 end

@@ -29,11 +29,11 @@ module Meru
         opts.separator("")
         opts.separator("Analysis:")
 
-        opts.on("--min-depth INT", "minimum k-mer depth to include (default: 2)") do |v|
+        opts.on("--min-depth INT", "minimum k-mer depth shown in histogram (default: 1)") do |v|
           config.min_depth = v.to_i
         end
 
-        opts.on("--max-depth INT", "maximum k-mer depth to include") do |v|
+        opts.on("--max-depth INT", "maximum k-mer depth shown in histogram") do |v|
           config.max_depth = v.to_i
         end
 
@@ -67,12 +67,16 @@ module Meru
         opts.separator("")
         opts.separator("Advanced:")
 
-        opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: --min-depth)") do |v|
+        opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: max(2, --min-depth))") do |v|
           config.pair_min_depth = v.to_i
         end
 
         opts.on("--pair-max-depth INT", "maximum k-mer depth for pair extraction (default: --max-depth)") do |v|
           config.pair_max_depth = v.to_i
+        end
+
+        opts.on("--chunk-size INT", "reads per worker chunk for parallel counting (default: 10000)") do |v|
+          config.chunk_size = v.to_i
         end
 
         opts.separator("")
@@ -108,7 +112,7 @@ module Meru
       config.input_paths = argv.dup
       validate_config!(config)
 
-      counter = Counter.count_files_parallel(config.input_paths, config.k, config.threads)
+      counter = Counter.count_files_parallel(config.input_paths, config.k, config.threads, config.chunk_size)
       hist = Histogram.from_counts(counter.counts)
 
       hist_path = "#{config.output_prefix}.kmer_hist.tsv"
@@ -125,7 +129,8 @@ module Meru
           counter.counts,
           config.k,
           config.effective_pair_min_depth,
-          config.effective_pair_max_depth
+          config.effective_pair_max_depth,
+          config.threads
         )
         pairs = pairs_local
         pairs_path = "#{config.output_prefix}.pairs.tsv"
@@ -154,7 +159,7 @@ module Meru
           if smudges_local = smudges
             Plot.smudge(
               smudges_local,
-              Plot.smudge_display_max_total_cov(config.max_depth),
+              Plot.smudge_display_max_total_cov(config.effective_pair_max_depth),
               !config.linear_smudge?,
               STDOUT,
               config.plot_width,
@@ -185,6 +190,7 @@ module Meru
       if pair_max_depth = config.pair_max_depth
         raise ArgumentError.new("pair max depth must be >= pair min depth") if pair_max_depth < config.effective_pair_min_depth
       end
+      raise ArgumentError.new("chunk size must be >= 1") if config.chunk_size < 1
       raise ArgumentError.new("plot width must be >= 1") if config.plot_width < 1
       raise ArgumentError.new("plot height must be >= 1") if config.plot_height < 1
       config.input_paths.each do |path|

@@ -32,7 +32,7 @@ Tiny example:
 bin/meru spec/fixtures/tiny.fastq -k 3 -o tiny
 ```
 
-`--min-depth` and `--max-depth` define the default analysis range for both histogram display and pair extraction. The default minimum depth is `2`, so singleton k-mers are skipped unless you lower it explicitly. `--pair-min-depth` and `--pair-max-depth` only override that range for pair extraction when you set them explicitly. When a smudgeplot is shown, `meru` expands the effective max depth to `max_depth * 2` on the y-axis because the smudgeplot uses total coverage (`depth_a + depth_b`), not single-k-mer depth.
+`--min-depth` and `--max-depth` define the histogram depth range. Pair extraction uses `max(2, --min-depth)` and `--max-depth` by default, so singleton error k-mers stay out of the smudge workflow unless you opt in explicitly. `--pair-min-depth` and `--pair-max-depth` override only the pair-extraction range. When a smudgeplot is shown, `meru` expands the effective pair max depth to `max_depth * 2` on the y-axis because the smudgeplot uses total coverage (`depth_a + depth_b`), not single-k-mer depth.
 
 Main outputs:
 

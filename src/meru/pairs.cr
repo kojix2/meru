@@ -1,10 +1,11 @@
 module Meru
   alias CoveragePair = Tuple(UInt32, UInt32)
+  alias PairWorkerResult = PairTable | Exception
 
   class PairTable
     getter bins : Hash(CoveragePair, UInt64)
 
-    def initialize(@bins : Hash(CoveragePair, UInt64))
+    def initialize(@bins : Hash(CoveragePair, UInt64) = Hash(CoveragePair, UInt64).new(0_u64))
     end
 
     def total_pairs : UInt64
@@ -15,6 +16,18 @@ module Meru
 
     def empty? : Bool
       @bins.empty?
+    end
+
+    def add(cov_a : UInt32, cov_b : UInt32, count : UInt64 = 1_u64) : Nil
+      ca = cov_a <= cov_b ? cov_a : cov_b
+      cb = cov_a <= cov_b ? cov_b : cov_a
+      @bins[{ca, cb}] += count
+    end
+
+    def merge!(other : PairTable) : Nil
+      other.bins.each do |key, value|
+        @bins[key] += value
+      end
     end
 
     def write_tsv(path : String)
@@ -33,28 +46,110 @@ module Meru
   module PairExtractor
     extend self
 
-    def extract(counts : KmerCounts, k : Int32, min_depth : Int32 = 2, max_depth : Int32? = nil) : PairTable
+    def extract(
+      counts : KmerCounts,
+      k : Int32,
+      min_depth : Int32 = 2,
+      max_depth : Int32? = nil,
+      threads : Int32 = 1,
+    ) : PairTable
       Kmer.validate_k!(k)
       raise ArgumentError.new("pair min depth must be >= 1") if min_depth < 1
+      raise ArgumentError.new("pair extraction threads must be >= 1") if threads < 1
       if max = max_depth
         raise ArgumentError.new("pair max depth must be >= pair min depth") if max < min_depth
       end
 
-      bins = Hash(CoveragePair, UInt64).new(0_u64)
       min_depth_u = min_depth.to_u32
       max_depth_u = max_depth.try(&.to_u32) || UInt32::MAX
+      if threads <= 1
+        extract_single(counts, k, min_depth_u, max_depth_u)
+      else
+        extract_parallel(counts, k, min_depth_u, max_depth_u, threads)
+      end
+    end
+
+    private def extract_single(
+      counts : KmerCounts,
+      k : Int32,
+      min_depth_u : UInt32,
+      max_depth_u : UInt32,
+    ) : PairTable
+      table = PairTable.new
       seen_neighbors = Array(UInt64).new(3 * k)
 
       counts.each do |kmer, cov1|
-        next unless depth_allowed?(cov1, min_depth_u, max_depth_u)
+        process_kmer(kmer, cov1, counts, k, min_depth_u, max_depth_u, table, seen_neighbors)
+      end
 
-        seen_neighbors.clear
-        each_unique_one_base_neighbor(kmer, k, seen_neighbors) do |neighbor|
-          add_pair_if_valid(bins, counts, kmer, cov1, neighbor, min_depth_u, max_depth_u)
+      table
+    end
+
+    private def extract_parallel(
+      counts : KmerCounts,
+      k : Int32,
+      min_depth_u : UInt32,
+      max_depth_u : UInt32,
+      threads : Int32,
+    ) : PairTable
+      keys = counts.keys
+      active_workers = Math.min(threads, keys.size)
+      return PairTable.new if active_workers == 0
+
+      chunk_size = (keys.size + active_workers - 1) // active_workers
+      results = Channel(PairWorkerResult).new(active_workers)
+
+      active_workers.times do |worker_id|
+        start = worker_id * chunk_size
+        stop = Math.min(start + chunk_size, keys.size)
+        next if start >= stop
+
+        spawn do
+          begin
+            local = PairTable.new
+            seen_neighbors = Array(UInt64).new(3 * k)
+
+            start.upto(stop - 1) do |idx|
+              kmer = keys[idx]
+              process_kmer(kmer, counts[kmer], counts, k, min_depth_u, max_depth_u, local, seen_neighbors)
+            end
+
+            results.send(local)
+          rescue ex
+            results.send(ex)
+          end
         end
       end
 
-      PairTable.new(bins)
+      merged = PairTable.new
+      active_workers.times do
+        result = results.receive
+        case result
+        when PairTable
+          merged.merge!(result)
+        when Exception
+          raise result
+        end
+      end
+      merged
+    end
+
+    private def process_kmer(
+      kmer : UInt64,
+      cov1 : UInt32,
+      counts : KmerCounts,
+      k : Int32,
+      min_depth_u : UInt32,
+      max_depth_u : UInt32,
+      table : PairTable,
+      seen_neighbors : Array(UInt64),
+    ) : Nil
+      return unless depth_allowed?(cov1, min_depth_u, max_depth_u)
+
+      seen_neighbors.clear
+      each_unique_one_base_neighbor(kmer, k, seen_neighbors) do |neighbor|
+        add_pair_if_valid(table, counts, kmer, cov1, neighbor, min_depth_u, max_depth_u)
+      end
     end
 
     private def depth_allowed?(depth : UInt32, min_depth : UInt32, max_depth : UInt32) : Bool
@@ -62,7 +157,7 @@ module Meru
     end
 
     private def add_pair_if_valid(
-      bins : Hash(CoveragePair, UInt64),
+      table : PairTable,
       counts : KmerCounts,
       kmer : UInt64,
       cov1 : UInt32,
@@ -76,9 +171,7 @@ module Meru
       return unless cov2
       return unless depth_allowed?(cov2, min_depth_u, max_depth_u)
 
-      ca = cov1 < cov2 ? cov1 : cov2
-      cb = cov1 < cov2 ? cov2 : cov1
-      bins[{ca, cb}] += 1_u64
+      table.add(cov1, cov2)
     end
 
     private def each_unique_one_base_neighbor(kmer : UInt64, k : Int32, seen_neighbors : Array(UInt64), & : UInt64 ->)

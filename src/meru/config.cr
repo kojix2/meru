@@ -12,6 +12,7 @@ module Meru
     property? hist_only : Bool
     property pair_min_depth : Int32?
     property pair_max_depth : Int32?
+    property chunk_size : Int32
     property? log_scale : Bool
     property? linear_smudge : Bool
     property plot_width : Int32
@@ -21,13 +22,14 @@ module Meru
       @k : Int32 = 21,
       @output_prefix : String = "meru",
       @threads : Int32 = 1,
-      @min_depth : Int32 = 2,
+      @min_depth : Int32 = 1,
       @max_depth : Int32? = nil,
       @plot : Bool = true,
       @input_paths : Array(String) = [] of String,
       @hist_only : Bool = false,
       @pair_min_depth : Int32? = nil,
       @pair_max_depth : Int32? = nil,
+      @chunk_size : Int32 = 10_000,
       @log_scale : Bool = false,
       @linear_smudge : Bool = false,
       @plot_width : Int32 = 80,
@@ -36,7 +38,7 @@ module Meru
     end
 
     def effective_pair_min_depth : Int32
-      @pair_min_depth || @min_depth
+      @pair_min_depth || Math.max(2, @min_depth)
     end
 
     def effective_pair_max_depth : Int32?
