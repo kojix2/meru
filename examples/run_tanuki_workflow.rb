@@ -45,6 +45,8 @@ def parse_args
     reads_per_copy: TanukiSupport::DEFAULT_READS_PER_COPY,
     read_length: TanukiSupport::DEFAULT_READ_LENGTH,
     seed: TanukiSupport::DEFAULT_SEED,
+    width: 40,
+    height: 30,
   }
 
   parser = OptionParser.new do |opts|
@@ -57,6 +59,8 @@ def parse_args
     end
     opts.on("--read-length INT", Integer, "Read length.") { |value| options[:read_length] = value }
     opts.on("--seed INT", Integer, "Base random seed.") { |value| options[:seed] = value }
+    opts.on("--width INT", Integer, "Plot width passed to meru.") { |value| options[:width] = value }
+    opts.on("--height INT", Integer, "Plot height passed to meru.") { |value| options[:height] = value }
   end
 
   parser.parse!
@@ -142,13 +146,13 @@ def write_report(outdir, rows, base_seed)
     handle.puts("  tanuki1 is haploid and carries only haplotype A.")
     handle.puts("  tanuki2 is diploid and carries A+B.")
     handle.puts("  tanuki4 is tetraploid and carries four related haplotypes: A+B+C+D.")
-    handle.puts("  tanuki20 is highly polyploid and carries A repeated 19 times plus one B copy.")
+    handle.puts("  tanuki8 is polyploid and carries A repeated 7 times plus one B copy.")
     handle.puts
     handle.puts("Interpretation guide:")
     handle.puts("  tanuki1 should show almost no smudge because there is no heterozygous partner haplotype.")
     handle.puts("  tanuki2 should concentrate near minor ratio 0.50.")
     handle.puts("  tanuki4 should show a mixed pattern: private SNPs near 0.25 and pair-shared SNPs near 0.50.")
-    handle.puts("  tanuki20 should concentrate near minor ratio 0.05 and much higher total coverage.")
+    handle.puts("  tanuki8 should concentrate near minor ratio 0.125 and higher total coverage.")
     handle.puts
     handle.puts("Observed summaries:")
     rows.each do |row|
@@ -172,7 +176,7 @@ def print_intro(base_seed)
   puts
   puts "#{style('  tanuki2', ANSI_BOLD, ANSI_GREEN)} = ploidy 2"
   puts "#{style('  tanuki4', ANSI_BOLD, ANSI_GREEN)} = ploidy 4"
-  puts "#{style('  tanuki20', ANSI_BOLD, ANSI_GREEN)} = ploidy 20"
+  puts "#{style('  tanuki8', ANSI_BOLD, ANSI_GREEN)} = ploidy 8"
   puts
   puts style("base seed: #{base_seed}", ANSI_DIM)
   puts
@@ -233,7 +237,15 @@ def print_comparison_summary(rows, outdir)
 end
 
 def build_meru_cmd(args, read_path, prefix, no_plot: false)
-  cmd = [args[:meru], read_path, "-k", args[:k].to_s, "-o", prefix, "--log-hist"]
+  cmd = [
+    args[:meru],
+    read_path,
+    "-k", args[:k].to_s,
+    "-o", prefix,
+    "--log-hist",
+    "--plot-width", args[:width].to_s,
+    "--plot-height", args[:height].to_s,
+  ]
   cmd << "--no-plot" if no_plot
   cmd
 end

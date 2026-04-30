@@ -48,7 +48,7 @@ module Meru
           config.plot = false
         end
 
-        opts.on("--log", "use log10(count + 1) for the k-mer histogram") do
+        opts.on("--log-hist", "use log10(count + 1) for the k-mer histogram") do
           config.log_scale = true
         end
 

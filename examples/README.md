@@ -19,7 +19,7 @@ The tanuki organisms all share nearly the same monoploid genome, but differ in p
 - `tanuki1`: ploidy 1, haplotype composition `A`
 - `tanuki2`: ploidy 2, haplotype composition `A + B`
 - `tanuki4`: ploidy 4, haplotype composition `A + B + C + D`
-- `tanuki20`: ploidy 20, haplotype composition `A x19 + B x1`
+- `tanuki8`: ploidy 8, haplotype composition `A x7 + B x1`
 
 In this story, haplotypes `A`, `B`, `C`, and `D` are closely related versions of the same chromosome with spaced SNP differences.
 Some SNPs are private to a single haplotype, and some are shared by exactly two haplotypes.
@@ -29,7 +29,7 @@ That means the expected minor-ratio story is:
 - `tanuki1`: no heterozygous smudge
 - `tanuki2`: about `1/2 = 0.50`
 - `tanuki4`: a mix of `1/4 = 0.25` private variants and `2/4 = 0.50` shared-pair variants
-- `tanuki20`: about `1/20 = 0.05`
+- `tanuki8`: about `1/8 = 0.125`
 
 Because `meru` uses a deliberately simple pair-extraction and signal heuristic, the observed `tanuki4` pattern will not look like a perfect biological decomposition.
 The point of `tanuki4` is to show that a tetraploid can contain both one-copy and two-copy variant classes at the same time.
@@ -44,6 +44,13 @@ cd examples
 rake tanuki MERU=../bin/meru
 ```
 
+You can also control the terminal plot size used by `meru`:
+
+```bash
+cd examples
+rake tanuki MERU=../bin/meru WIDTH=100 HEIGHT=24
+```
+
 That command is meant to be the main experience: it prints the three most informative smudge heatmaps first.
 To stay closer to the original `smudgeplot` project, the interactive view foregrounds the smudge heatmap rather than the k-mer histogram.
 The x-axis stays at minor ratio `0.0..0.5`, while the y-axis is allowed to scale naturally for each tanuki.
@@ -52,7 +59,7 @@ The order is:
 
 1. `tanuki2` smudge
 2. `tanuki4` smudge
-3. `tanuki20` smudge
+3. `tanuki8` smudge
 4. final summary table
 
 `tanuki1` is still generated and included in the saved summary, but omitted from the main interactive heatmap section because it is haploid and usually has no smudge.
@@ -64,12 +71,12 @@ examples/out/tanuki/README.txt
 examples/out/tanuki/genomes/tanuki1.fa
 examples/out/tanuki/genomes/tanuki2.fa
 examples/out/tanuki/genomes/tanuki4.fa
-examples/out/tanuki/genomes/tanuki20.fa
+examples/out/tanuki/genomes/tanuki8.fa
 examples/out/tanuki/reads/tanuki1.fastq
 examples/out/tanuki/meru/tanuki1_terminal.txt
 examples/out/tanuki/meru/tanuki2_terminal.txt
 examples/out/tanuki/meru/tanuki4_terminal.txt
-examples/out/tanuki/meru/tanuki20_terminal.txt
+examples/out/tanuki/meru/tanuki8_terminal.txt
 ```
 
 The most useful saved files are:
@@ -88,7 +95,7 @@ If you want to revisit the terminal plots afterward, look at the captured files:
 sed -n '/Smudgeplot/,$p' examples/out/tanuki/meru/tanuki1_terminal.txt
 sed -n '/Smudgeplot/,$p' examples/out/tanuki/meru/tanuki2_terminal.txt
 sed -n '/Smudgeplot/,$p' examples/out/tanuki/meru/tanuki4_terminal.txt
-sed -n '/Smudgeplot/,$p' examples/out/tanuki/meru/tanuki20_terminal.txt
+sed -n '/Smudgeplot/,$p' examples/out/tanuki/meru/tanuki8_terminal.txt
 ```
 
 What you should see:
@@ -96,7 +103,7 @@ What you should see:
 - `tanuki1`: almost no smudge because there is only one haplotype
 - `tanuki2`: a hotspot near minor ratio `0.50`
 - `tanuki4`: signal near both `0.25` and `0.50`, reflecting private SNPs and shared-pair SNPs
-- `tanuki20`: a hotspot near minor ratio `0.05`, with much higher total coverage
+- `tanuki8`: a hotspot near minor ratio `0.125`, with higher total coverage
 
 Also inspect the summary report:
 
@@ -134,6 +141,8 @@ bin/meru \
   examples/out/tanuki/reads/tanuki4.fastq \
   -k 21 \
   -o examples/out/tanuki/meru/tanuki4 \
+  --plot-width 100 \
+  --plot-height 24 \
   --log-hist
 ```
 
@@ -143,7 +152,7 @@ bin/meru \
 - The simulator currently favors clean educational reads over realistic sequencing noise, because that makes the ploidy-dependent smudges easier to see in `meru`.
 - The genomes are still tiny and artificial on purpose; this is for visualization and intuition, not realism.
 - `tanuki4` is intentionally not an `AAAB` toy anymore; it is built from four related haplotypes with both one-copy and two-copy variant classes.
-- `tanuki20` is included to show that `meru` can still produce a visible smudge pattern even when the ploidy is far outside the simple `AB / AAB / AAAB` labels.
-- The `tanuki4` and especially `tanuki20` examples are most useful as visual heatmap demos; the rough `signals.tsv` labels are intentionally much simpler than the underlying ploidy story.
+- `tanuki8` is included to show that `meru` can still produce a visible smudge pattern outside the simple `AB / AAB / AAAB` labels without being quite so extreme.
+- The `tanuki4` and `tanuki8` examples are most useful as visual heatmap demos; the rough `signals.tsv` labels are intentionally much simpler than the underlying ploidy story.
 - The interactive workflow intentionally foregrounds the smudge heatmap, because that is the closest match to the original `smudgeplot` experience.
 - `examples/Rakefile` is the intended entry point for the demo workflow.

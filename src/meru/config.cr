@@ -32,8 +32,8 @@ module Meru
       @chunk_size : Int32 = 10_000,
       @log_scale : Bool = false,
       @linear_smudge : Bool = false,
-      @plot_width : Int32 = 80,
-      @plot_height : Int32 = 20,
+      @plot_width : Int32 = 40,
+      @plot_height : Int32 = 30,
     )
     end
 

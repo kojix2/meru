@@ -27,20 +27,20 @@ module TanukiSupport
       "haplotypes" => ["A", "B", "C", "D"],
       "expected_note" => "private SNPs near 0.25 and pair-shared SNPs near 0.50",
     },
-    "tanuki20" => {
-      "ploidy" => 20,
-      "haplotypes" => (["A"] * 19) + ["B"],
-      "expected_note" => "one minor haplotype copy; private SNPs should concentrate near 0.05",
+    "tanuki8" => {
+      "ploidy" => 8,
+      "haplotypes" => (["A"] * 7) + ["B"],
+      "expected_note" => "one minor haplotype copy; private SNPs should concentrate near 0.125",
     },
   }.freeze
 
-  DISPLAY_SPECIES = ["tanuki2", "tanuki4", "tanuki20"].freeze
+  DISPLAY_SPECIES = ["tanuki2", "tanuki4", "tanuki8"].freeze
 
   SPECIES_NOTES = {
     "tanuki1" => "ploidy 1, haplotype A only, expected: almost no smudge",
     "tanuki2" => "ploidy 2, haplotypes A+B, expected hotspot near minor ratio 0.50",
     "tanuki4" => "ploidy 4, haplotypes A+B+C+D, expected private SNPs near 0.25 and shared-pair SNPs near 0.50",
-    "tanuki20" => "ploidy 20, haplotypes A x19 + B x1, expected hotspot near minor ratio 0.05",
+    "tanuki8" => "ploidy 8, haplotypes A x7 + B x1, expected hotspot near minor ratio 0.125",
   }.freeze
 
   VARIANT_GROUPS = [
