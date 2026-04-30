@@ -233,7 +233,7 @@
   </h2>
   
     
-      <a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L4" target="_blank">
+      <a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L4" target="_blank">
         meru/config.cr
       </a>
     
@@ -256,7 +256,7 @@
   <ul class="list-summary">
     
       <li class="entry-summary">
-        <a href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D2%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%7CNil%3Dnil%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method" class="signature"><strong>.new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">2</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 | Nil = <span class="n">nil</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)</a>
+        <a href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D2%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%7CNil%3Dnil%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Clinear_smudge%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method" class="signature"><strong>.new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">2</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 | Nil = <span class="n">nil</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, linear_smudge : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)</a>
         
       </li>
     
@@ -315,6 +315,16 @@
     
       <li class="entry-summary">
         <a href="#k%3D%28k%3AInt32%29-instance-method" class="signature"><strong>#k=</strong>(k : Int32)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#linear_smudge%3D%28linear_smudge%3ABool%29-instance-method" class="signature"><strong>#linear_smudge=</strong>(linear_smudge : Bool)</a>
+        
+      </li>
+    
+      <li class="entry-summary">
+        <a href="#linear_smudge%3F%3ABool-instance-method" class="signature"><strong>#linear_smudge?</strong> : Bool</a>
         
       </li>
     
@@ -475,18 +485,18 @@
     Constructor Detail
   </h2>
   
-    <div class="entry-detail" id="new(k:Int32=21,output_prefix:String=&quot;meru&quot;,threads:Int32=1,min_depth:Int32=2,max_depth:Int32|Nil=nil,plot:Bool=true,input_paths:Array(String)=[]ofString,hist_only:Bool=false,pair_min_depth:Int32|Nil=nil,pair_max_depth:Int32|Nil=nil,log_scale:Bool=false,plot_width:Int32=80,plot_height:Int32=20)-class-method">
+    <div class="entry-detail" id="new(k:Int32=21,output_prefix:String=&quot;meru&quot;,threads:Int32=1,min_depth:Int32=2,max_depth:Int32|Nil=nil,plot:Bool=true,input_paths:Array(String)=[]ofString,hist_only:Bool=false,pair_min_depth:Int32|Nil=nil,pair_max_depth:Int32|Nil=nil,log_scale:Bool=false,linear_smudge:Bool=false,plot_width:Int32=80,plot_height:Int32=20)-class-method">
       <div class="signature">
         
-        def self.<strong>new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">2</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 | Nil = <span class="n">nil</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)
+        def self.<strong>new</strong>(k : Int32 = <span class="n">21</span>, output_prefix : String = <span class="s">&quot;meru&quot;</span>, threads : Int32 = <span class="n">1</span>, min_depth : Int32 = <span class="n">2</span>, max_depth : Int32 | Nil = <span class="n">nil</span>, plot : Bool = <span class="n">true</span>, input_paths : Array(String) = <span class="o">[]</span> <span class="k">of</span> <span class="t">String</span>, hist_only : Bool = <span class="n">false</span>, pair_min_depth : Int32 | Nil = <span class="n">nil</span>, pair_max_depth : Int32 | Nil = <span class="n">nil</span>, log_scale : Bool = <span class="n">false</span>, linear_smudge : Bool = <span class="n">false</span>, plot_width : Int32 = <span class="n">80</span>, plot_height : Int32 = <span class="n">20</span>)
 
-        <a class="method-permalink" href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D2%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%7CNil%3Dnil%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method">#</a>
+        <a class="method-permalink" href="#new%28k%3AInt32%3D21%2Coutput_prefix%3AString%3D%22meru%22%2Cthreads%3AInt32%3D1%2Cmin_depth%3AInt32%3D2%2Cmax_depth%3AInt32%7CNil%3Dnil%2Cplot%3ABool%3Dtrue%2Cinput_paths%3AArray%28String%29%3D%5B%5DofString%2Chist_only%3ABool%3Dfalse%2Cpair_min_depth%3AInt32%7CNil%3Dnil%2Cpair_max_depth%3AInt32%7CNil%3Dnil%2Clog_scale%3ABool%3Dfalse%2Clinear_smudge%3ABool%3Dfalse%2Cplot_width%3AInt32%3D80%2Cplot_height%3AInt32%3D20%29-class-method">#</a>
       </div>
       
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L19" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L20" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -518,7 +528,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L40" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L42" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -534,7 +544,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L36" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L38" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -550,7 +560,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -566,7 +576,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L12" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L12" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -582,7 +592,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -598,7 +608,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L11" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L11" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -614,7 +624,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L5" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -630,7 +640,39 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L5" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L5" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="linear_smudge=(linear_smudge:Bool)-instance-method">
+      <div class="signature">
+        
+        def <strong>linear_smudge=</strong>(linear_smudge : Bool)
+
+        <a class="method-permalink" href="#linear_smudge%3D%28linear_smudge%3ABool%29-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L16" target="_blank">View source</a>]
+        
+      </div>
+    </div>
+  
+    <div class="entry-detail" id="linear_smudge?:Bool-instance-method">
+      <div class="signature">
+        
+        def <strong>linear_smudge?</strong> : Bool
+
+        <a class="method-permalink" href="#linear_smudge%3F%3ABool-instance-method">#</a>
+      </div>
+      
+      <br/>
+      <div>
+        
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L16" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -646,7 +688,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -662,7 +704,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L15" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L15" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -678,7 +720,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -694,7 +736,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L9" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L9" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -710,7 +752,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -726,7 +768,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L8" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L8" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -742,7 +784,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -758,7 +800,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L6" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L6" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -774,7 +816,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -790,7 +832,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L14" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L14" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -806,7 +848,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -822,7 +864,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L13" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L13" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -838,7 +880,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -854,7 +896,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L10" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L10" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -870,7 +912,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -886,7 +928,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L17" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L18" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -902,7 +944,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -918,7 +960,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L16" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L17" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -934,7 +976,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
@@ -950,7 +992,7 @@
       <br/>
       <div>
         
-          [<a href="https://github.com/kojix2/meru/blob/56fe0a88b7c99d456009ce4bd421ee9c444ead83/src/meru/config.cr#L7" target="_blank">View source</a>]
+          [<a href="https://github.com/kojix2/meru/blob/6846874e7093734450b90fed4e9efe3643bfabba/src/meru/config.cr#L7" target="_blank">View source</a>]
         
       </div>
     </div>
