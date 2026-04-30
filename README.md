@@ -1,5 +1,8 @@
 # meru
 
+[![build](https://github.com/kojix2/meru/actions/workflows/build.yml/badge.svg)](https://github.com/kojix2/meru/actions/workflows/build.yml)
+[![Lines of Code](https://img.shields.io/endpoint?url=https%3A%2F%2Ftokei.kojix2.net%2Fbadge%2Fgithub%2Fkojix2%2Fmeru%2Flines)](https://tokei.kojix2.net/github/kojix2/meru)
+
 `meru` is a small Crystal CLI for exploratory k-mer profiling in the terminal.
 
 This is a simple project created with agentic AI coding. It displays Smudgeplot-like heatmaps in the terminal.
