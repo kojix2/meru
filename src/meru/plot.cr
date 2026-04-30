@@ -9,14 +9,14 @@ module Meru
 
     def histogram(
       hist : Histogram,
-      min_cov : Int32 = 1,
-      max_cov : Int32? = nil,
+      min_depth : Int32 = 1,
+      max_depth : Int32? = nil,
       log_y : Bool = false,
       io : IO = STDOUT,
       width : Int32 = DEFAULT_PLOT_WIDTH,
       height : Int32 = DEFAULT_PLOT_HEIGHT,
     )
-      Unicode.histogram(hist, min_cov, max_cov, log_y, io, width, height)
+      Unicode.histogram(hist, min_depth, max_depth, log_y, io, width, height)
     end
 
     def smudge(smudges : SmudgeTable, max_total_cov : Int32? = nil, io : IO = STDOUT, width : Int32 = 60, height : Int32 = 20)
@@ -32,8 +32,8 @@ module Meru
 
       def histogram(
         hist : Histogram,
-        min_cov : Int32 = 1,
-        max_cov : Int32? = nil,
+        min_depth : Int32 = 1,
+        max_depth : Int32? = nil,
         log_y : Bool = false,
         io : IO = STDOUT,
         width : Int32 = DEFAULT_PLOT_WIDTH,
@@ -42,7 +42,7 @@ module Meru
         x = [] of Float64
         y = [] of Float64
 
-        hist.each_bin(min_cov, max_cov) do |cov, count|
+        hist.each_bin(min_depth, max_depth) do |cov, count|
           x << cov.to_f
           y << histogram_value(count, log_y)
         end

@@ -9,47 +9,66 @@ module Meru
 
       parser = OptionParser.new do |opts|
         opts.banner = "Usage: meru [options] READS..."
+        opts.summary_width = 24
 
-        opts.on("-k INT", "--kmer=INT", "k-mer length (default: 21, max: 32)") do |v|
+        opts.separator("")
+        opts.separator("Basic options:")
+        opts.on("-k", "--kmer INT", "k-mer length (default: 21, max: 32)") do |v|
           config.k = v.to_i
         end
 
-        opts.on("-o PREFIX", "--output=PREFIX", "output prefix (default: meru)") do |v|
+        opts.on("-o", "--output PREFIX", "output prefix (default: meru)") do |v|
           config.output_prefix = v
         end
 
-        opts.on("-t INT", "--threads=INT", "number of worker fibers (default: 1)") do |v|
+        opts.on("-t", "--threads INT", "number of worker fibers (default: 1)") do |v|
           config.threads = v.to_i
         end
 
-        opts.on("--min-cov=INT", "minimum coverage shown in histogram (default: 1)") do |v|
-          config.min_cov = v.to_i
+        opts.separator("")
+        opts.separator("Analysis:")
+        opts.on("--min-depth INT", "minimum k-mer depth to include (default: 1)") do |v|
+          config.min_depth = v.to_i
         end
 
-        opts.on("--max-cov=INT", "maximum coverage shown in histogram and smudge plot") do |v|
-          config.max_cov = v.to_i
+        opts.on("--max-depth INT", "maximum k-mer depth to include") do |v|
+          config.max_depth = v.to_i
         end
 
-        opts.on("--pair-min-cov=INT", "minimum k-mer coverage used for pair extraction (default: 2)") do |v|
-          config.pair_min_cov = v.to_i
-        end
-
-        opts.on("--pair-max-cov=INT", "maximum k-mer coverage used for pair extraction") do |v|
-          config.pair_max_cov = v.to_i
-        end
-
-        opts.on("--hist-only", "only count k-mers and write histogram/summary") do
+        opts.on("--hist-only", "only count k-mers and write histogram") do
           config.hist_only = true
         end
 
-        opts.on("--log-hist", "plot histogram using log10(count + 1) on the y-axis") do
-          config.log_hist = true
-        end
-
+        opts.separator("")
+        opts.separator("Plot:")
         opts.on("--no-plot", "do not print terminal plots") do
           config.plot = false
         end
 
+        opts.on("--log", "use log-scaled plots") do
+          config.log_scale = true
+        end
+
+        opts.on("--plot-width INT", "plot width (default: 80)") do |v|
+          config.plot_width = v.to_i
+        end
+
+        opts.on("--plot-height INT", "plot height (default: 20)") do |v|
+          config.plot_height = v.to_i
+        end
+
+        opts.separator("")
+        opts.separator("Advanced:")
+        opts.on("--pair-min-depth INT", "minimum k-mer depth for pair extraction (default: 2)") do |v|
+          config.pair_min_depth = v.to_i
+        end
+
+        opts.on("--pair-max-depth INT", "maximum k-mer depth for pair extraction") do |v|
+          config.pair_max_depth = v.to_i
+        end
+
+        opts.separator("")
+        opts.separator("Other:")
         opts.on("--version", "show version") do
           show_version = true
         end
@@ -86,14 +105,14 @@ module Meru
       hist_path = "#{config.output_prefix}.kmer_hist.tsv"
       summary_path = "#{config.output_prefix}.summary.txt"
 
-      hist.write_tsv(hist_path, config.min_cov, config.max_cov)
+      hist.write_tsv(hist_path, config.min_depth, config.max_depth)
 
       pairs = nil.as(PairTable?)
       smudges = nil.as(SmudgeTable?)
       signals = nil.as(Array(Signal)?)
 
       unless config.hist_only?
-        pairs_local = PairExtractor.extract(counter.counts, config.k, config.pair_min_cov, config.pair_max_cov)
+        pairs_local = PairExtractor.extract(counter.counts, config.k, config.pair_min_depth, config.pair_max_depth)
         pairs = pairs_local
         pairs_path = "#{config.output_prefix}.pairs.tsv"
         pairs_local.write_tsv(pairs_path)
@@ -115,11 +134,11 @@ module Meru
       Summary.write(summary_path, config, counter, hist, pairs, signals)
 
       if config.plot?
-        Plot.histogram(hist, config.min_cov, config.max_cov, config.log_hist?)
+        Plot.histogram(hist, config.min_depth, config.max_depth, config.log_scale?, STDOUT, config.plot_width, config.plot_height)
         unless config.hist_only?
           puts
           if smudges_local = smudges
-            Plot.smudge(smudges_local, config.max_cov)
+            Plot.smudge(smudges_local, config.max_depth, STDOUT, config.plot_width, config.plot_height)
           end
         end
       end
@@ -135,14 +154,16 @@ module Meru
       raise ArgumentError.new("no input FASTQ files given") if config.input_paths.empty?
       Kmer.validate_k!(config.k)
       raise ArgumentError.new("threads must be >= 1") if config.threads < 1
-      raise ArgumentError.new("min coverage must be >= 1") if config.min_cov < 1
-      if max_cov = config.max_cov
-        raise ArgumentError.new("max coverage must be >= min coverage") if max_cov < config.min_cov
+      raise ArgumentError.new("min depth must be >= 1") if config.min_depth < 1
+      if max_depth = config.max_depth
+        raise ArgumentError.new("max depth must be >= min depth") if max_depth < config.min_depth
       end
-      raise ArgumentError.new("pair min coverage must be >= 1") if config.pair_min_cov < 1
-      if pair_max = config.pair_max_cov
-        raise ArgumentError.new("pair max coverage must be >= pair min coverage") if pair_max < config.pair_min_cov
+      raise ArgumentError.new("pair min depth must be >= 1") if config.pair_min_depth < 1
+      if pair_max_depth = config.pair_max_depth
+        raise ArgumentError.new("pair max depth must be >= pair min depth") if pair_max_depth < config.pair_min_depth
       end
+      raise ArgumentError.new("plot width must be >= 1") if config.plot_width < 1
+      raise ArgumentError.new("plot height must be >= 1") if config.plot_height < 1
       config.input_paths.each do |path|
         raise ArgumentError.new("input file not found: #{path}") unless File.exists?(path)
       end

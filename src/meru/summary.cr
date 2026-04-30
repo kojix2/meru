@@ -12,8 +12,8 @@ module Meru
         io.puts "Parameters:"
         io.puts "  k: #{config.k}"
         io.puts "  threads: #{config.threads}"
-        io.puts "  pair min coverage: #{config.pair_min_cov}"
-        io.puts "  pair max coverage: #{config.pair_max_cov || "auto"}"
+        io.puts "  pair min depth: #{config.pair_min_depth}"
+        io.puts "  pair max depth: #{config.pair_max_depth || "auto"}"
         io.puts
         io.puts "K-mer count:"
         io.puts "  total reads: #{counter.total_reads}"
@@ -24,8 +24,8 @@ module Meru
         io.puts
         io.puts "Histogram:"
         io.puts "  peak coverage: #{hist.peak_coverage}"
-        io.puts "  max coverage: #{hist.max_coverage}"
-        io.puts "  displayed coverage range: #{config.min_cov}..#{config.max_cov || hist.max_coverage}"
+        io.puts "  max depth: #{hist.max_coverage}"
+        io.puts "  displayed depth range: #{config.min_depth}..#{config.max_depth || hist.max_coverage}"
 
         if pair_table = pairs
           io.puts

@@ -33,32 +33,32 @@ module Meru
   module PairExtractor
     extend self
 
-    def extract(counts : KmerCounts, k : Int32, min_cov : Int32 = 2, max_cov : Int32? = nil) : PairTable
+    def extract(counts : KmerCounts, k : Int32, min_depth : Int32 = 2, max_depth : Int32? = nil) : PairTable
       Kmer.validate_k!(k)
-      raise ArgumentError.new("pair min coverage must be >= 1") if min_cov < 1
-      if max = max_cov
-        raise ArgumentError.new("pair max coverage must be >= pair min coverage") if max < min_cov
+      raise ArgumentError.new("pair min depth must be >= 1") if min_depth < 1
+      if max = max_depth
+        raise ArgumentError.new("pair max depth must be >= pair min depth") if max < min_depth
       end
 
       bins = Hash(CoveragePair, UInt64).new(0_u64)
-      min_cov_u = min_cov.to_u32
-      max_cov_u = max_cov.try(&.to_u32) || UInt32::MAX
+      min_depth_u = min_depth.to_u32
+      max_depth_u = max_depth.try(&.to_u32) || UInt32::MAX
       seen_neighbors = Array(UInt64).new(3 * k)
 
       counts.each do |kmer, cov1|
-        next unless coverage_allowed?(cov1, min_cov_u, max_cov_u)
+        next unless depth_allowed?(cov1, min_depth_u, max_depth_u)
 
         seen_neighbors.clear
         each_unique_one_base_neighbor(kmer, k, seen_neighbors) do |neighbor|
-          add_pair_if_valid(bins, counts, kmer, cov1, neighbor, min_cov_u, max_cov_u)
+          add_pair_if_valid(bins, counts, kmer, cov1, neighbor, min_depth_u, max_depth_u)
         end
       end
 
       PairTable.new(bins)
     end
 
-    private def coverage_allowed?(cov : UInt32, min_cov : UInt32, max_cov : UInt32) : Bool
-      cov >= min_cov && cov <= max_cov
+    private def depth_allowed?(depth : UInt32, min_depth : UInt32, max_depth : UInt32) : Bool
+      depth >= min_depth && depth <= max_depth
     end
 
     private def add_pair_if_valid(
@@ -67,14 +67,14 @@ module Meru
       kmer : UInt64,
       cov1 : UInt32,
       neighbor : UInt64,
-      min_cov_u : UInt32,
-      max_cov_u : UInt32,
+      min_depth_u : UInt32,
+      max_depth_u : UInt32,
     ) : Nil
       return if neighbor == kmer
       return unless kmer < neighbor
       cov2 = counts[neighbor]?
       return unless cov2
-      return unless coverage_allowed?(cov2, min_cov_u, max_cov_u)
+      return unless depth_allowed?(cov2, min_depth_u, max_depth_u)
 
       ca = cov1 < cov2 ? cov1 : cov2
       cb = cov1 < cov2 ? cov2 : cov1

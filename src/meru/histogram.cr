@@ -40,9 +40,9 @@ module Meru
       best_cov
     end
 
-    def each_bin(min_cov : Int32 = 1, max_cov : Int32? = nil, & : UInt32, UInt64 ->)
-      lower = min_cov < 1 ? 1_u32 : min_cov.to_u32
-      upper = if max = max_cov
+    def each_bin(min_depth : Int32 = 1, max_depth : Int32? = nil, & : UInt32, UInt64 ->)
+      lower = min_depth < 1 ? 1_u32 : min_depth.to_u32
+      upper = if max = max_depth
                 max.to_u32
               else
                 max_coverage
@@ -55,10 +55,10 @@ module Meru
       end
     end
 
-    def write_tsv(path : String, min_cov : Int32 = 1, max_cov : Int32? = nil)
+    def write_tsv(path : String, min_depth : Int32 = 1, max_depth : Int32? = nil)
       File.open(path, "w") do |io|
         io.puts "coverage\tcount"
-        each_bin(min_cov, max_cov) do |cov, count|
+        each_bin(min_depth, max_depth) do |cov, count|
           io.puts "#{cov}\t#{count}"
         end
       end
